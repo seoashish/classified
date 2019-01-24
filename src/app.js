@@ -1,17 +1,13 @@
 const express = require("express");
 const app = express();
+const home = require("./routes/home");
+const user = require("./routes/users");
+
 
 app.set("view engine", "twig");
 
-app.get("/", (req, res) => {
-     //res.send("Hello World!");
-       res.render("home", { title: "Classified", message: "Hello there!" });
-});
-
-app.get("/user", (req, res) => {
-      res.render("users/userLanding", { title: "SignIn & SignUp Page" });
-});
-
+app.use("/", home);
+app.use("/u", user);
 
 
 
