@@ -13,7 +13,7 @@
     "local"
   ],
   "author": "Ashish Kerketta",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",
     "express-messages": "^1.0.1",
