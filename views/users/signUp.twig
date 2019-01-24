@@ -4,40 +4,39 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
+                
                 <br>
                 <!-- Jumbotron -->
                 <div class="jumbotron">
-                  <div class="container">
+                                   
                     <div class="row">
-                      
                       <div class="col-md-8 offset-md-2">
-                            <h1 class="mx-auto text-center"><i class="fa fa-user-plus"></i>&nbsp; SignUp</h1> 
-                            <form action="/signup" method="post">
+                            <h1 class="mx-auto text-center"><i class="fa fa-user-plus"></i>&nbsp; Sign Up</h1> 
+                            <form action="/u/signup" method="post">
                               <div class="form-group">
                                 <label for="name">Full Name:</label>
-                                <input type="text" class="form-control" name="name" id="name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="First_name Last_name">
                               </div>
                               <div class="form-group">
-                                <label for="email">Email address:</label>
-                                <input type="text" class="form-control" name="email" id="email">
+                                <label for="email">Email Address:</label>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="example@gmail.com">
                               </div>
                               <div class="form-group">
                                 <label for="pwd">Password:</label>
-                                <input type="password" class="form-control" name="password" id="pwd">
+                                <input type="password" class="form-control" name="password" id="pwd" placeholder="********">
                               </div>
                               <div class="form-group">
                                 <label for="rpwd">Confirm Password:</label>
-                                <input type="password" class="form-control" name="rpassword" id="rpwd">
+                                <input type="password" class="form-control" name="rpassword" id="rpwd" placeholder="********">
                               </div>
-                              <button type="submit" class="btn btn-warning">SignUp</button>
+                              <button type="submit" class="btn btn-warning btn-block">Sign Up</button>
                             </form>
-                            <p>Already have an account? <a href="/u/signin">SignIn</a></p>
+                            <p>Already have an account? <a href="/u/signin">Sign-In</a></p>
                             <p>or go <a href="/">home</a></p>
                       </div>
-                    
                     </div>
-                  </div> 
+                  
                 </div>
         </div>
     </div>
