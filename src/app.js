@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-      res.render("users/login", { title: "User Login Page", message: "Hello User!" });
+      res.render("users/userLanding", { title: "SignIn & SignUp Page" });
 });
 
 

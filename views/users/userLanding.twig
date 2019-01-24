@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+{% block title %} {{ title }} {% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+                <br><br><br>
+                <!-- Jumbotron -->
+                <div class="jumbotron">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-8">
+                        <h1 class="mx-auto text-center"><i class="fa fa-lock"></i>&nbsp; Login System</h1> 
+                        <p class="text-center">Login or Register with:</p>
+                        <div class="text-center">
+          
+                          <a href="#">
+                          <button type="button" class="btn btn-outline-secondary"><i class="fa fa-user"></i>&nbsp; Local Login</button>
+                          </a>
+                          <a href="#">
+                          <button type="button" class="btn btn-outline-secondary"><i class="fa fa-user"></i>&nbsp; Local Signup</button>
+                          </a>
+                          
+                        </div>
+                      </div>
+                      <div class="col-sm-2"></div>
+                    </div>
+                  </div> 
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
