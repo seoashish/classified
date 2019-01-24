@@ -1,0 +1,21 @@
+{
+  "name": "classified",
+  "version": "1.0.0",
+  "description": "online business platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "classified",
+    "online",
+    "business",
+    "local"
+  ],
+  "author": "Ashish Kerketta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "twig": "^1.13.2"
+  }
+}
