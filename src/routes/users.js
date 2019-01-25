@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { User } = require("../models/user");
 
 router.get("/", (req, res) => {
     res.render("users/userLanding", { title: "SignIn & SignUp Page" });
@@ -9,10 +10,9 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", (req, res) =>{
-       req.flash('success_msg', 'Account successfully created');
-       req.flash('error_msg', 'Email is already exist!');
-       req.flash('error', 'Error message');
-       res.redirect("/u/signup");
+
+      // req.flash('success_msg', 'Account successfully created');
+      // res.redirect("/u/signup");
 });
 
 router.get("/signin", (req, res) => {

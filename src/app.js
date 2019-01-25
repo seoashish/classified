@@ -3,13 +3,36 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
+const mongoose = require("mongoose");
 const home = require("./routes/home");
 const user = require("./routes/users");
+const errorHandler = require("./middlewares/errorHandler");
 
+/**
+ * MongoDB connection istablished
+ */
+mongoose.connect("mongodb://localhost:27017/classified", { useNewUrlParser: true })
+.then( () => console.log('Connected to MongoDB...'))
+.catch(err => console.log("Could not connected to MongoDB", err));
 
+/**
+ * set twig as view engine
+ */
 app.set("view engine", "twig");
+
+/**
+ * body parse into json format
+ */
 app.use(express.json());
+
+/**
+ * post/get data parse into json format
+ */
 app.use(express.urlencoded({ extended: true }));
+
+/**
+ * serve public folder publicly
+ */
 app.use(express.static("public"));
 
 /**
@@ -21,9 +44,9 @@ app.use(cookieParser());
  * express-session middleware
  */
 app.use(session({
-    secret: "my_secret_key",
-    resave: true,
-    saveUninitialized: true
+    secret: "dfsdfdggfkdhifdujdfksdfh",
+    resave: false,
+    saveUninitialized: false
 }));
 
 /**
@@ -47,17 +70,10 @@ app.use(function(req, res, next){
 app.use("/", home);
 app.use("/u", user);
 
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * error handling middleware
+ */
+app.use(errorHandler);
 
 
 
