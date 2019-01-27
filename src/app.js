@@ -9,11 +9,11 @@ const user = require("./routes/users");
 const errorHandler = require("./middlewares/errorHandler");
 
 /**
- * MongoDB connection istablished
+ * MongoDB connection established
  */
-mongoose.connect("mongodb://localhost:27017/classified", { useNewUrlParser: true })
+mongoose.connect("mongodb://localhost:27017/classified", { useCreateIndex: true, useNewUrlParser: true })
 .then( () => console.log('Connected to MongoDB...'))
-.catch(err => console.log("Could not connected to MongoDB", err));
+.catch(err => console.log("Could not connected to MongoDB..."));
 
 /**
  * set twig as view engine
@@ -61,6 +61,7 @@ app.use(function(req, res, next){
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.user = null;
   next();
 });
 

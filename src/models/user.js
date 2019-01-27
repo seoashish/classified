@@ -2,30 +2,48 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
-    name: { 
+    firstname: { 
         type: String,
-        required: true
+        required: true,
+        minlength: 5,
+        maxlength: 30
+    },
+    lastname: { 
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 30
     },
     username: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        minlength: 5,
+        maxlength: 255
     },
     passwordHash: {
         type: String,
+        required: true,
+        set: value => bcrypt.hashSync(value, 10),
+        alias: 'password'
+    },
+    token: {
+        type: String,
         required: true
+    },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
+    isActive:{
+        type: Boolean,
+        default: false
+    },
+    passReset: {
+        type: Boolean,
+        default: false
     }
 });
-
-/**
- * create virtual field instance level
- */
-userSchema.virtual('password')
-  .get(function(){ return null; })
-  .set(function(value){
-     const hash = bcrypt.hashSync(value, 10);
-     this.passwordHash = hash;
-  });
 
   /**
    * create a authenticate function to check password match or not

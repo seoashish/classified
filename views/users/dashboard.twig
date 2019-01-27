@@ -2,4 +2,26 @@
 {% block title %} {{ title }} {% endblock title %}
 
 {% block body %}
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: darkgreen">
+        <a class="navbar-brand" href="/">myBrand</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <a class="nav-link text-light" href="/"><i class="fa fa-home"></i> Home</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> User</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="/u/dashboard"><i class="fa fa-cog"></i> Setting</a>
+                              <a class="dropdown-item" href="/u/signout"><i class="fa fa-power-off"></i> SignOut</a>
+                        </div>
+                      </li>
+              </ul>
+          
+        </div>
+</nav>
 {% endblock body %}
