@@ -16,24 +16,38 @@
                       <li class="nav-item">
                         <a class="nav-link text-light" href="/"><i class="fas fa-home"></i> Home</a>
                       </li>
+                      {% if user %}
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="/u/dashboard"><i class="fas fa-cog"></i> Setting</a>
+                              <a class="dropdown-item" href="/u/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
                               <a class="dropdown-item" href="/u/signout"><i class="fas fa-power-off"></i> SignOut</a>
                         </div>
                       </li>
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link text-light" href="#"><i class="fas fa-user"></i> User</a>
+                      </li>
+                      {% endif %}
               </ul>
           
         </div>
 </nav>
 <!-- nav bar end -->
-{% if success %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ success }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="row">
+                <div class="col-md-4 bg-dark">
+                    <h3>category</h3>
+                </div>
+                <div class="col-md-8">
+                    <h1>classified</h1>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-{% endif %}
+
 {% endblock body %}

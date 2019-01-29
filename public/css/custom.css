@@ -1,0 +1,23 @@
+.bg-limegreen{
+    background-color: limegreen;
+}
+.bg-darkgreen{
+    background-color: darkgreen;
+}
+.bg-lightgreen{
+    background-color: lightgreen;
+}
+.bg-darkseagreen{
+    background-color: darkseagreen;
+}
+.bd-highlight{
+    background-color: gray;
+}
+
+/* custom nav style */
+#customNav{
+    background-color: rgba(0, 100, 0, 1);
+}    
+#customNav:hover{
+    background-color: rgba(0, 100, 0, 1);
+}

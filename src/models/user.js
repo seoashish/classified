@@ -6,20 +6,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 30
+        maxlength: 30,
+        trim: true
     },
     lastname: { 
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 30
+        maxlength: 30,
+        trim: true
     },
     username: {
         type: String,
         unique: true,
         required: true,
-        minlength: 5,
-        maxlength: 255
+        maxlength: 255,
+        trim: true
     },
     passwordHash: {
         type: String,
@@ -62,15 +64,35 @@ userSchema.methods.authenticate = function(password){
 userSchema.statics.authenticate = function(username, password, done){
       this.findOne({ username: username }, function(err, user){
            if(err){
-               console.log("Error attempting to use statics authenticate function", err);
                done(err);
-           }else if(user && user.authenticate(password)){
-               console.log("This should be a successfull login.");
-               done(null, user);
            }else{
-               console.log("Probably got their password wrong.");
-               done(null, false);
+               if(user === null){
+                   done(null, user, { user: false });
+               }else{
+                   if(!user.isActive){
+                    done(null, user, { user: true, notActive: true });
+                   }else if(user && user.authenticate(password)){
+                    done(null, user, { user: true, isMatch: true });
+                   }else{
+                    done(null, user, { user: true, isMatch: false });
+                   }
+                   
+               }  
+
            }
+              
+           
+           
+           /* else{
+               if(!user.isActive){
+                   done(null, user, true);
+               }else if(user && user.authenticate(password)){
+                   done(null, user);
+               }else{
+                   done(null, false);
+               }
+           } */
+           
       });
 };
 

@@ -1,34 +1,74 @@
 {% extends "layout.twig" %}
 {% block title %} {{ title }} {% endblock title %}
+{% block head%}
+<link rel="stylesheet" href="css/custom.css">
+<script src="js/particle.js"></script>
+{% endblock head%}
 
 {% block body %}
+<!-- canvas start -->
+<canvas id="my_canvas" width="1000" height="300" style="background-color: rgb(67, 3, 243);"></canvas>
 
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: darkgreen">
-  <a class="navbar-brand" href="/">myBrand</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link text-light" href="#"><i class="fa fa-search"></i> Search</a>
-                </li>
-                {% if user %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> User</a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/u/dashboard"><i class="fa fa-th-large"></i> Dashboard</a>
-                        <a class="dropdown-item" href="/u/signout"><i class="fa fa-power-off"></i> SignOut</a>
-                  </div>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/u"><i class="fa fa-user"></i> User</a>
-                </li>
-                {% endif %}
-        </ul>
-    
-  </div>
+<!-- nav bar start -->
+<nav id="customNav" class="navbar fixed-top navbar-expand-md navbar-dark">
+    <a class="navbar-brand" href="/">myBrand</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"><i class="fas fa-search"></i> Search</a>
+                  </li>
+                  {% if user %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/u/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+                          <a class="dropdown-item" href="/u/signout"><i class="fas fa-power-off"></i> SignOut</a>
+                    </div>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="/u"><i class="fas fa-user"></i> Sign In</a>
+                  </li>
+                  {% endif %}
+          </ul>
+      
+    </div>
 </nav>
+<!-- nav bar end -->
+<h1>Hello World!</h1>
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti odio quibusdam alias officia suscipit, quod architecto repudiandae dicta tenetur. Laboriosam reiciendis ut illo est eligendi quis excepturi dolorem veniam error, labore eaque, ratione accusantium saepe dicta qui, nostrum alias minus repellendus laborum! Quibusdam tempore error, eius, porro deserunt quisquam quas, esse vel reprehenderit aliquid placeat. Repellat temporibus perferendis suscipit reprehenderit unde, magnam quidem fugiat hic laudantium accusamus, pariatur voluptatibus, maxime soluta non numquam laboriosam similique veritatis nobis dolorem. Natus doloribus error, soluta, hic maxime velit ea sequi nihil, porro culpa sapiente illum qui expedita! Cumque dignissimos minima soluta quam sapiente obcaecati doloribus accusantium iure. Asperiores, quam perspiciatis. Fuga repudiandae laudantium delectus numquam accusantium quis asperiores quam, voluptatum, doloribus amet a minima, tempore expedita repellat laboriosam aperiam assumenda esse eligendi impedit velit porro. Vero ducimus vitae perferendis. Illum, eius! Repellat blanditiis vitae debitis tempore iure voluptatum quis magni rerum cumque, reprehenderit illo consequuntur accusantium ea praesentium dignissimos enim ipsum, autem veritatis deserunt? Nihil laboriosam laborum at molestias dolores porro explicabo dolore sit, et sint distinctio, illo corporis eveniet quaerat repudiandae itaque totam amet cum tenetur culpa ipsam. Architecto officiis necessitatibus provident odio inventore incidunt, earum dolores voluptas eius odit molestias cum veritatis aliquam obcaecati, aliquid, tempore ut reprehenderit magnam. Voluptatum eum nihil officia quasi eius, illum expedita laborum nam voluptatem odit eveniet omnis dolorem ea optio ad minus magnam neque nemo excepturi porro. Corrupti aliquam atque, cum aspernatur explicabo fugit eius cupiditate quam excepturi repellendus iusto facere est qui vitae debitis enim esse expedita et placeat incidunt minima voluptas tenetur voluptatibus! Assumenda laudantium a ipsa quisquam atque dolores sequi maxime quia aperiam excepturi. Sit ducimus magni fugit sapiente architecto ipsum, nisi expedita voluptatum, neque nam, quae veniam beatae provident alias est temporibus? Mollitia sapiente ipsam officia eum dolorem sit quam atque! Sequi odit reiciendis, iste incidunt voluptas deleniti quos! Alias, praesentium? Dolorum voluptatem corporis laborum omnis. Repellat quam eius dolorum minima fugit unde provident esse voluptas magni explicabo, nesciunt maiores earum laboriosam, illum, atque nemo dolorem cum veritatis eveniet maxime? Libero excepturi dolorem doloremque atque voluptatum commodi debitis earum, nostrum quod architecto voluptatem eius iure nulla voluptate assumenda, autem incidunt? Amet, sapiente. Suscipit minus in debitis exercitationem? Dignissimos esse, voluptatem officia hic a ducimus dolorem, fugiat, suscipit optio consequatur saepe porro in voluptatum reprehenderit modi? Repellendus culpa laudantium quos odit dolores at cum cumque! Commodi voluptatem repellat aliquid laborum impedit maiores dolor natus suscipit debitis saepe! Consectetur doloribus dicta unde. Ratione odit fuga quae velit maiores enim, tenetur dolores blanditiis cupiditate vitae quas quod soluta error facere, omnis doloribus illo quo nemo sed! Quaerat hic amet deserunt id recusandae voluptates dolor, expedita suscipit, dolore sunt quisquam. Praesentium, animi voluptas ipsum commodi adipisci labore consequatur ut iste est saepe at assumenda aliquam illum ipsa quas, fuga quia enim accusamus a ullam. Quaerat, autem provident ea dolorem hic voluptas reiciendis aperiam debitis rem, amet ex, distinctio tenetur delectus atque neque omnis placeat perferendis? Provident eos asperiores quasi earum repellendus, animi esse dolore temporibus?</p>
+<div class="row bg-dark">
+  <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+    <div class="row">
+      <div class="col-sm-4 text-light">
+          <br>
+          <h5>Company</h5>
+          <ul class="fa-ul">
+              <li><span class="fa-li" ><i class="fas fa-angle-right"></i></span>List icons can</li>
+              <li><span class="fa-li"><i class="fas fa-angle-right"></i></span>be used to</li>
+              <li><span class="fa-li"><i class="fas fa-angle-right"></i></span>replace bullets</li>
+              <li><span class="fa-li"><i class="fas fa-angle-right"></i></span>in lists</li>
+          </ul>    
+      </div>
+      <div class="col-sm-4 text-light">
+          <br>
+          <h5>Follow us</h5>
+          <ul class="fa-ul">
+              <li><span class="fa-li" ><i class="fas fa-angle-right"></i></span>List icons can</li>
+              <li><span class="fa-li"><i class="fas fa-angle-right"></i></span>be used to</li>
+              <li><span class="fa-li"><i class="fas fa-angle-right"></i></span>replace bullets</li>
+              <li><span class="fa-li"><i class="fas fa-angle-right"></i></span>in lists</li>
+          </ul>
+      </div>
+      <div class="col-sm-4 text-light">
+          <br>
+          <h5>Location</h5>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock body %}

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const passport = require("passport");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const home = require("./routes/home");
@@ -34,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
  * serve public folder publicly
  */
 app.use(express.static("public"));
-
+app.use("/u", express.static("public"));      // file access for user route
 /**
  * cookie-parser middleware
  */
@@ -50,6 +51,13 @@ app.use(session({
 }));
 
 /**
+ * passport init below session
+ */
+app.use(passport.initialize());
+app.use(passport.session());
+require("./services/passportconfig").configure(passport);
+
+/**
  * Use connect-flash after cookie-parser and session
  */
 app.use(flash());
@@ -58,10 +66,11 @@ app.use(flash());
  * Global variable
  */
 app.use(function(req, res, next){
+  res.locals.success = req.flash('success');
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
-  res.locals.user = null;
+  res.locals.user = req.user || null;
   next();
 });
 
@@ -70,6 +79,13 @@ app.use(function(req, res, next){
  */
 app.use("/", home);
 app.use("/u", user);
+
+/**
+ * 404 route handler
+ */
+app.get('*', function(req, res){
+  res.render("404page", { title: "404 Error" });
+});
 
 /**
  * error handling middleware

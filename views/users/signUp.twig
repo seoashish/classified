@@ -1,44 +1,94 @@
-{% extends "layout.twig" %}
+{% extends "./layout.twig" %}
 {% block title %} {{ title }} {% endblock title %}
 
 {% block body %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
-                
-                <br>
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% elseif error_msg %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_msg }}
+                </div>
+                {% elseif success_msg %}
+                <div class="alert alert-success" role="alert">
+                {{ success_msg }}
+                </div>
+                {% else %}
+                         <br>
+                {% endif %} 
+      
                 <!-- Jumbotron -->
                 <div class="jumbotron">
-                         {% if success_msg %}
-                         <div class="alert alert-success" role="alert">
-                          {{ success_msg }}
-                         </div>
-                         {% endif %}          
+                                  
                     <div class="row">
                       <div class="col-md-8 offset-md-2">
-                            <h1 class="mx-auto text-center"><i class="fa fa-user-plus"></i>&nbsp; Sign Up</h1> 
+                            <h1 class="mx-auto text-center"><i class="fas fa-user-plus"></i>&nbsp; Sign Up</h1> 
                             <form action="/u/signup" method="post">
                               <div class="form-row">
                                 <div class="form-group col-sm-6">
+                                  {% if errors.firstname %}
                                   <label for="firstname">First Name:</label>
-                                  <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First name">
+                                  <input type="text" class="form-control is-invalid" name="firstname" id="firstname" required>
+                                  <div class="invalid-feedback">
+                                      {{ errors.firstname.msg }}
+                                  </div>
+                                  {% else %}
+                                  <label for="firstname">First Name:</label>
+                                  <input type="text" class="form-control" name="firstname" id="firstname" value="{{users.firstname}}" required>
+                                  {% endif %}
                                 </div>
                                 <div class="form-group col-sm-6">
+                                  {% if errors.lastname %}
                                   <label for="lastname">Last Name:</label>
-                                  <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last name">
+                                  <input type="text" class="form-control is-invalid" name="lastname" id="lastname" required>
+                                  <div class="invalid-feedback">
+                                      {{ errors.lastname.msg }}
+                                  </div>
+                                  {% else %}
+                                  <label for="lastname">Last Name:</label>
+                                  <input type="text" class="form-control" name="lastname" id="lastname" value="{{users.lastname}}" required>
+                                  {% endif %}
                                 </div>
                               </div>
                               <div class="form-group">
+                                {% if errors.username %}
                                 <label for="email">Email Address:</label>
-                                <input type="text" class="form-control" name="username" id="email" placeholder="example@gmail.com">
+                                <input type="text" class="form-control is-invalid" name="username" id="email" required>
+                                <div class="invalid-feedback">
+                                    {{ errors.username.msg }}
+                                </div>
+                                {% else %}
+                                <label for="email">Email Address:</label>
+                                <input type="text" class="form-control" name="username" id="email" value="{{users.username}}" required>
+                                {% endif %}
                               </div>
                               <div class="form-group">
+                                {% if errors.password %}
                                 <label for="pwd">Password:</label>
-                                <input type="password" class="form-control" name="password" id="pwd" placeholder="********">
+                                <input type="password" class="form-control is-invalid" name="password" id="pwd" required>
+                                <div class="invalid-feedback">
+                                    {{ errors.password.msg }}
+                                </div>
+                                {% else %}
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" name="password" id="pwd" value="{{users.password}}" required>
+                                {% endif %}
                               </div>
                               <div class="form-group">
+                                {% if errors.rpassword %}
                                 <label for="rpwd">Confirm Password:</label>
-                                <input type="password" class="form-control" name="rpassword" id="rpwd" placeholder="********">
+                                <input type="password" class="form-control is-invalid" name="rpassword" id="rpwd" required>
+                                <div class="invalid-feedback">
+                                    {{ errors.rpassword.msg }}
+                                </div>
+                                {% else %}
+                                <label for="rpwd">Confirm Password:</label>
+                                <input type="password" class="form-control" name="rpassword" id="rpwd" value="{{users.rpassword}}" required>
+                                {% endif %}
                               </div>
                               <button type="submit" class="btn btn-warning btn-block">Sign Up</button>
                             </form>
