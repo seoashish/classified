@@ -1,5 +1,6 @@
 {
-    "mail": {
+   "database": "app_database", 
+   "mail": {
         "password": "app_password"
     }
 }

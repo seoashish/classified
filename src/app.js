@@ -1,3 +1,4 @@
+const config = require("config");
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -12,7 +13,7 @@ const errorHandler = require("./middlewares/errorHandler");
 /**
  * MongoDB connection established
  */
-mongoose.connect("mongodb://localhost:27017/classified", { useCreateIndex: true, useNewUrlParser: true })
+mongoose.connect(config.get('database'), { useCreateIndex: true, useNewUrlParser: true })
 .then( () => console.log('Connected to MongoDB...'))
 .catch(err => console.log("Could not connected to MongoDB..."));
 

@@ -1,7 +1,10 @@
 const nodeMailer = require("nodemailer");
 
 let transporter = nodeMailer.createTransport({
-  host: 'smtp.gmail.com',
+        service: 'gmail',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
   auth: {
       user: 'seoashishkerketta@gmail.com',
       pass: 'event999'
@@ -23,12 +26,12 @@ const sendMail = function(dataObject, done){
     if (error) {
         done(error);
     }
-    //console.log('MessageId %s : ', info.messageId);
+    console.log('MessageId : ', info);
     //console.log('Envelope %s : ', info.envelope);
     //console.log('Accepted %s : ', info.accepted);
     //console.log('Rejected %s : ', info.rejected);
     //console.log('Pending %s : ', info.pending);
-    console.log('Response %s : ', info.response);
+    //console.log('Response %s : ', info.response);
     });
   
 };
