@@ -43,7 +43,7 @@ app.use("/src", express.static("public"));
 /**
  * server favicon
  */
-app.use(favicon(__dirname + '/demo.ico'));
+app.use(favicon(__dirname + '/public/demo.ico'));
 
 /**
  * check application mode : development or production
