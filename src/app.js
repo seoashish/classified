@@ -38,6 +38,7 @@ app.use(express.urlencoded({ extended: true }));
  */
 app.use(express.static("public"));
 app.use("/u", express.static("public"));      // file access for user route
+app.use("/src", express.static("public"));
 
 /**
  * server favicon
