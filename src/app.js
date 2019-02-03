@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 const flash = require("connect-flash");
 const favicon = require("express-favicon");
@@ -62,7 +63,10 @@ app.use(cookieParser());
 app.use(session({
     secret: "dfsdfdggfkdhifdujdfksdfh",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({
+      url: config.get('database')
+    })
 }));
 
 /**
