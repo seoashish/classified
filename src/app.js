@@ -65,7 +65,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
-      url: config.get('database')
+      mongooseConnection: mongoose.connection
     })
 }));
 
