@@ -1,5 +1,6 @@
 {
     "name": "My Express App - Development",
+    "database": "mongdb://localhost:27017/classified",
     "mail": {
         "host": "dev-mail-server"
     }

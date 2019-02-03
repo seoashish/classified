@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
+const favicon = require("express-favicon");
 const mongoose = require("mongoose");
 const home = require("./routes/home");
 const user = require("./routes/users");
@@ -37,6 +38,19 @@ app.use(express.urlencoded({ extended: true }));
  */
 app.use(express.static("public"));
 app.use("/u", express.static("public"));      // file access for user route
+
+/**
+ * server favicon
+ */
+app.use(favicon(__dirname + '/public/demo.ico'));
+
+/**
+ * check application mode : development or production
+ */
+if(app.get('env') === 'development'){
+    console.log('Application runing in Development Mode...');
+}
+
 /**
  * cookie-parser middleware
  */
