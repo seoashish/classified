@@ -38,12 +38,11 @@ app.use(express.urlencoded({ extended: true }));
  */
 app.use(express.static("public"));
 app.use("/u", express.static("public"));      // file access for user route
-app.use("/src", express.static("public"));
 
 /**
  * server favicon
  */
-app.use(favicon(__dirname + '/public/demo.ico'));
+app.use(favicon('/demo.ico'));
 
 /**
  * check application mode : development or production
