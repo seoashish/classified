@@ -1,0 +1,14 @@
+/* category style */
+.category{
+    box-shadow: 0px 6px 20px #e6e6ff;
+}
+.category > div.title{
+     border-bottom: 2px solid #e9ecef;
+}
+ .category > ul li{
+     padding: 2px;
+ }
+
+ .category > ul li:not(:last-child){
+     border-bottom: 1px solid #e9ecef;
+ }
