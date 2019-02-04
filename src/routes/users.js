@@ -12,7 +12,7 @@ const { signupValidator, resetValidator, forgotValidator, validationResult, matc
  */
 router.get("/", (req, res, next) => {
     // if user log-in doesn't access this route redirect to root
-     res.render("users/userLanding", { title: "Sign In & Sign Up Page" });
+     res.render("users/signIN", { title: "Sign In Page" });
     
     
 });
@@ -159,7 +159,7 @@ router.post("/reset", resetValidator, (req, res, next) => {
 /**
  * forgot password form
  */
-router.get("/forgot", (req, res, next) => {
+router.get("/forgot-password", (req, res, next) => {
     res.render("users/forgotPassword", { title: "Forgot password" });
 });
 
@@ -167,7 +167,7 @@ router.get("/forgot", (req, res, next) => {
  * post confirm route forgot password
  * data receive from forgotPassword.twig
  */
-router.post("/forgot", forgotValidator, (req, res, next) => {
+router.post("/forgot-password", forgotValidator, (req, res, next) => {
     // check email isActive
     const errors = validationResult(req);
     const user = matchedData(req);
@@ -212,7 +212,7 @@ router.post("/forgot", forgotValidator, (req, res, next) => {
             });
             
             req.flash('success_msg', 'Password reset instruction send in email address.');
-            res.redirect("/u/forgot");   
+            res.redirect("/u/forgot-password");   
            });
         }else{
             res.render("users/forgotPassword", { title: "Forgot password" });

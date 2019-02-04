@@ -15,6 +15,7 @@ const errorHandler = require("./middlewares/errorHandler");
 /**
  * MongoDB connection established
  */
+mongoose.Promise = global.Promise;
 mongoose.connect(config.get('database'), { useCreateIndex: true, useNewUrlParser: true })
 .then( () => console.log('Connected to MongoDB...'))
 .catch(err => console.log("Could not connected to MongoDB..."));

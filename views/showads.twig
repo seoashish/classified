@@ -1,53 +1,245 @@
 {% extends "layout.twig" %}
 {% block title %} {{ title }} {% endblock title %}
 {% block head%}
-<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/custom_home.css">
 {% endblock head%}
 
 {% block body %}
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: darkgreen">
-        <a class="navbar-brand" href="/">myBrand</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                      <li class="nav-item">
-                        <a class="nav-link text-light" href="/"><i class="fas fa-home"></i> Home</a>
-                      </li>
-                      {% if user %}
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User</a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="/u/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
-                              <a class="dropdown-item" href="/u/signout"><i class="fas fa-power-off"></i> SignOut</a>
-                        </div>
-                      </li>
-                      {% else %}
-                      <li class="nav-item">
-                        <a class="nav-link text-light" href="#"><i class="fas fa-user"></i> User</a>
-                      </li>
-                      {% endif %}
-              </ul>
-          
+<!-- Header Section -->
+<div class="d-flex flex-column flex-md-row align-items-md-center bg-whitesmoke p-2">
+        <div class="brand pl-2 align-self-center "><a href="/">
+        <img src="/demo.png" width="40" height="40" alt="logo">
+        <h2 class="pl-1">Classified</h2>
+        </a></div>
+    
+        <div class="d-flex align-items-center ml-md-auto">
+            <p id="post_add" class="font-weight-bold mb-0 mr-5"><a href="/u/dashboard">POST YOUR AD</a></p>
+            <p id="login_btn" class="mb-0 ml-auto"><a class="signin font-weight-bold" href="/u/signin">SIGN IN</a><a class="signup font-weight-bold" href="/u/signup"> /SIGN UP</a></p>
         </div>
-</nav>
-<!-- nav bar end -->
+    </div>
+<!-- Header Section end -->
 
+<!-- content section start -->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="row">
-                <div class="col-md-4 bg-dark">
-                    <h3>category</h3>
-                </div>
-                <div class="col-md-8">
-                    <h1>classified</h1>
-                </div>
+    <div class="row my-2">
+        <div class="col-sm-3 col-md-2 d-none d-sm-block">
+            <div id="left-side-bar">
+                    <h5 class="font-weight-normal text-limegreen border-bottom border-limegreen pb-2 mb-2">CATEGORIES</h5>
+                    <ul class="list-unstyled">
+                        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-3">Computers</span><i class="fas fa-angle-down fa-2x bg-lightgray px-2 ml-auto"></i></li>
+                    </ul>
             </div>
+        </div>
+        <div class="col-sm-9 col-md-8">
+            <div id="main-box">
+                    <div class="search d-flex bg-whitesmoke p-1">
+                            <div>Sort</div>
+                            <div class="ml-auto"><i class="fas fa-th"></i><i class="fas fa-list ml-2"></i></div>
+                    </div>
+                    <div class="list">
+                        <div class="d-flex flex-column border my-2">
+                            <div class="img_title d-flex p-1">
+                                <div class="image" style="width: 200px;">
+                                    <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                </div>
+                                <div class="title p-2">
+                                    <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                    <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                    <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                    <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                </div>  
+                            </div>
+                            <div class="description px-2">
+                                <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column border my-2">
+                                <div class="img_title d-flex p-1">
+                                    <div class="image" style="width: 200px;">
+                                        <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                    </div>
+                                    <div class="title px-1">
+                                        <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                    </div>  
+                                </div>
+                                <div class="description px-2">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                                </div>
+                        </div>
+
+                        <div class="d-flex flex-column border my-2">
+                                <div class="img_title d-flex p-1">
+                                    <div class="image" style="width: 200px;">
+                                        <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                    </div>
+                                    <div class="title p-2">
+                                        <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                    </div>  
+                                </div>
+                                <div class="description px-2">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                                </div>
+                        </div>
+
+                        <div class="d-flex flex-column border my-2">
+                                <div class="img_title d-flex p-1">
+                                    <div class="image" style="width: 200px;">
+                                        <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                    </div>
+                                    <div class="title p-2">
+                                        <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                    </div>  
+                                </div>
+                                <div class="description px-2">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                                </div>
+                        </div>
+
+                        <div class="d-flex flex-column border my-2">
+                                <div class="img_title d-flex p-1">
+                                    <div class="image" style="width: 200px;">
+                                        <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                    </div>
+                                    <div class="title p-2">
+                                        <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                    </div>  
+                                </div>
+                                <div class="description px-2">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                                </div>
+                        </div>
+
+                        <div class="d-flex flex-column border my-2">
+                                <div class="img_title d-flex p-1">
+                                    <div class="image" style="width: 200px;">
+                                        <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                    </div>
+                                    <div class="title p-2">
+                                        <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                    </div>  
+                                </div>
+                                <div class="description px-2">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                                </div>
+                        </div>
+
+                        <div class="d-flex flex-column border my-2">
+                                <div class="img_title d-flex p-1">
+                                    <div class="image" style="width: 200px;">
+                                        <img src="/img/200x165.jpg" class="img-fluid img-thumbnail" alt="">
+                                    </div>
+                                    <div class="title p-2">
+                                        <p class="font-weight-bold text-limegreen mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>example@gmail.com</p>
+                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>www.example.com</p>
+                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>9876543210</p>
+                                    </div>  
+                                </div>
+                                <div class="description px-2">
+                                    <p class="mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque explicabo porro molestiae error vitae alias totam adipisci commodi quaerat. </p>
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>Bokaro <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>Computers</p>
+                                </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+                <div id="right-side-bar">
+                        <h5 class="font-weight-normal text-limegreen border-bottom border-limegreen pb-2 mb-2">CITIES</h5>
+                        <ul class="list-unstyled">
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
+        
+                        </ul>
+                    </div>
         </div>
     </div>
 </div>
 
+
+<!-- footer section start -->
+<div class="container-fluid">
+        <footer class="row bg-dark">
+            <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+              <div class="row">
+                <div class="col-sm-4">
+                    <div class="p-2">
+                          <h4 class="text-light font-weight-normal">Company</h4>
+                          <ul class="list-unstyled">
+                              <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Contact us</a></li>
+                              <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>About us</a></li>
+                              <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Blogs</a></li>
+                              <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Terms and Conditions</a></li>
+                              <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Privacy Policy</a></li>
+                          </ul>
+                    </div>    
+                </div>
+                <div class="col-sm-4">
+                      <div class="p-2">
+                              <h4 class="text-light font-weight-normal">Follow us</h4>
+                              <ul class="list-unstyled">
+                                  <li>
+                                      <a href="#" class="text-light"><i class="fab fa-facebook-square fa-2x pr-1"></i></a>
+                                      <a href="#" class="text-light"><i class="fab fa-twitter-square fa-2x pr-1"></i></a>
+                                      <a href="#" class="text-light"><i class="fab fa-google-plus-square fa-2x pr-1"></i></a>
+                                  </li>
+                              </ul>
+                      </div>
+                </div>
+                <div class="col-sm-4">
+                      <div class="p-2">
+                              <h4 class="text-light font-weight-normal">Location</h4>
+                              
+                              
+                      </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+          
+          <!--     copyright     -->
+          <div class="row bg-limegreen">
+              <div class="col-sm-12">
+              <p class="text-sm-center text-light m-0">All Rights Reserved <i class="fas fa-copyright"></i> 2019 Classified</p>
+              </div>
+          </div>
+          <!--    copyright end   -->
+          
+</div>
 {% endblock body %}

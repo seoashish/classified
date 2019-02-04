@@ -1,3 +1,4 @@
+/* background colors*/
 .bg-limegreen{
     background-color: limegreen;
 }
@@ -10,8 +11,19 @@
 .bg-darkseagreen{
     background-color: darkseagreen;
 }
-.bd-highlight{
+.bg-whitesmoke{
+    background-color: #f5f5f5;
+}
+.bg-gray{
     background-color: gray;
+}
+.bg-lightgray{
+    background-color: #c7c7c7;
+}
+
+/* text color */
+.text-limegreen{
+   color: limegreen;
 }
 
 /* custom nav style */
