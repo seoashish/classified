@@ -12,7 +12,7 @@ const { signupValidator, resetValidator, forgotValidator, validationResult, matc
  */
 router.get("/", (req, res, next) => {
     // if user log-in doesn't access this route redirect to root
-     res.render("users/signIN", { title: "Sign In Page" });
+     res.render("users/signIn", { title: "Sign In Page" });
     
     
 });
