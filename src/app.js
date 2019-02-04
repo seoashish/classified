@@ -50,6 +50,7 @@ app.use(favicon(__dirname + '/demo.ico'));
  */
 if(app.get('env') === 'development'){
     console.log('Application runing in Development Mode...');
+    console.log('Database Url: ', config.get('database'));
 }
 
 /**
