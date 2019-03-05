@@ -1,12 +1,12 @@
 const nodeMailer = require("nodemailer");
 
 let transporter = nodeMailer.createTransport({
-	host: 'smtp.gmail.com',
-	port: 587,
+	host: 'smtp.elasticemail.com',
+	port: 2525,
 	secure: false,
   auth: {
       user: 'seoashishkerketta@gmail.com',
-      pass: 'event999'
+      pass: 'da01a642-dba0-49bb-b136-ee8a289b7c44'
   }
 });
 
