@@ -38,14 +38,14 @@ const sendMail = function(dataObject, done){
 
 const confirmHtml = function(email, token){
   let html = `<p>Confirm your email address to complete your registration. It's easy - just click the button below.</p>
-              <a href="http://localhost:3000/u/confirm/${email}/${token}">Confirm now</a>`;
+              <a href="http://www.classified.ml/u/confirm/${email}/${token}">Confirm now</a>`;
   return html;
 
 };
 
 const resetHtml = function(email, token){
   let html = `<p>To reset password follow instruction. It's easy - just click the button below.</p>
-              <a href="http://localhost:3000/u/reset/${email}/${token}">Confirm now</a>`;
+              <a href="http://www.classified.ml/u/reset/${email}/${token}">Confirm now</a>`;
   return html;
 
 };
