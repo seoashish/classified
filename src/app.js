@@ -10,7 +10,8 @@ const favicon = require("express-favicon");
 const mongoose = require("mongoose");
 const home = require("./routes/home");
 const user = require("./routes/users");
-const DBapi = require("./routes/DBapi");
+const admin = require("./routes/admin");
+const Api = require("./routes/api");
 const errorHandler = require("./middlewares/errorHandler");
 
 /**
@@ -101,11 +102,12 @@ app.use(function(req, res, next){
  */
 app.use("/", home);
 app.use("/u", user);
+app.use("/a", admin);
 
 /**
  * Data base API
  */
-app.use("/api", DBapi);
+app.use("/api", Api);
 
 /**
  * 404 route handler

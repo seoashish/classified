@@ -269,8 +269,12 @@ router.get("/signout", (req, res, next) => {
      res.redirect("/");
 });
 
-
-
+/**
+ * add classified router
+ */
+router.get("/add", (req, res, next) =>{
+    res.render("users/add", { title: "Add Classified"});
+});
 
 
 

@@ -22,19 +22,73 @@
 <!-- content section start -->
 <div class="container-fluid">
     <div class="row my-2">
-        <div class="col-sm-3 col-md-2 d-none d-sm-block">
+        <!-- CATEGORIES BLOCK -->
+        <div class="col-md-3 col-lg-2 d-none d-md-block">
             <div id="left-side-bar">
                     <h5 class="font-weight-normal text-limegreen border-bottom border-limegreen pb-2 mb-2">CATEGORIES</h5>
                     <ul class="list-unstyled">
-                        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">Computers</span><i class="fas fa-angle-down fa-2x bg-lightgray px-2 ml-auto"></i></li>
+                        
+                        <!-- Category accordion 01-->
+                        <div class="main-category">
+                        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">Automobiles & Vehicles</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>
+                        </div>
+                        <div class="sub-category collapse">
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="auto dealer">Auto Dealers</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="auto insurance">Auto Insurance</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="auto parts & services">Auto Parts & Services</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="bicycles">Bicycles</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="boats">Boats</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="motorcycles">Motorcycles</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="SUVs & trucks">SUVs & Trucks</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="userd cars">Used Cars</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="other auto ads">Other Auto Ads</span></li>
+                        </div>
+
+                        <!-- Category accordion 02-->
+                        <div class="main-category">
+                        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">Computers</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>
+                        </div>
+                        <div class="sub-category collapse">
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="computer games">Computer Games</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="desktops">Desktops</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="hardware">Hardware</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="information technologies">Information Technologies</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="laptops">Laptops</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="software">Software</span></li>
+                                <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="other computers ads">Other Computers Ads</span></li>
+                        </div>
+
+        
                     </ul>
             </div>
         </div>
-        <div class="col-sm-9 col-md-8">
+        <div class="col-sm-12 col-md-9 col-lg-8">
             <div id="main-box">
-                    <div class="search d-flex bg-whitesmoke p-1">
-                            <div>Sort</div>
-                            <div class="ml-auto"><i class="fas fa-th"></i><i class="fas fa-list ml-2"></i></div>
+                    <!-- Page Limit & Sort div -->
+                    <div class="search bg-whitesmoke p-1 px-sm-2">
+                            
+                                <form class="form-inline">
+                                 <div class="form-group">
+                                    <label>Show</label>
+                                    <select class="form-control form-control-sm mx-sm-1" id="page-limit">
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25">25</option>
+                                    </select>
+                                    <label> entries</label>
+                                 </div> 
+                                 <div class="form-group ml-auto">
+                                    <label>Short</label>
+                                    <select class="form-control form-control-sm mx-sm-1" id="sort-by">
+                                        <option value="title">Title</option>
+                                        <option value="website">Website</option>
+                                        <option value="date">Date</option>
+                                    </select>
+                                </div> 
+                                </form>
+                            
+                            
                     </div>
                     <div class="list">
                         <div class="d-flex flex-column border my-2">
@@ -164,28 +218,41 @@
                         </div>
 
                     </div>
+                    <!-- Pagination div -->
+                    <div id="pagination_list">
+                        
+                    </div>
             </div>
         </div>
-        <div class="col-md-2 d-none d-md-block">
+
+        <!-- CITY BLOCK -->
+        <div class="col-lg-2 d-none d-lg-block">
                 <div id="right-side-bar">
                         <h5 class="font-weight-normal text-limegreen border-bottom border-limegreen pb-2 mb-2">CITIES</h5>
-                        <ul class="list-unstyled">
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-                            <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-angle-right fa-2x bg-lightgray px-2"></i><span class="pl-3">Bokaro</span></li>
-        
+                        <ul class="list-unstyled" id="citylist">
+                            <!-- City accordion 01 -->
+                            <div class="main-city">
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">Bokaro</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>    
+                            </div>
+                            <div class="sub-city collapse">
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="chandrapura">Chandrapura</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="chas">Chas</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="bokaro steel city">Bokaro Steel City</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="gumia">Gumia</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="chandankiyari">Chandankiyari</span></li>         
+                            </div>
+                            
+                            <!-- City accordion 02 -->
+                            <div class="main-city">
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">Dhanbad</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>    
+                            </div>
+                            <div class="sub-city collapse">
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="baghmara-cum-katras">Baghmara-cum-Katras</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="dhanbad">Dhanbad</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="gopinpur">Gopinpur</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="jharia-cum-sindri">Jharia-cum-Sindri</span></li>
+                                    <li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="nirsa">Nirsa</span></li>         
+                            </div>
                         </ul>
                     </div>
         </div>
@@ -243,3 +310,6 @@
           
 </div>
 {% endblock body %}
+{% block script %}
+<script src="js/ajaxpagination.js"></script>
+{% endblock script %}

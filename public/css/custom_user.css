@@ -4,6 +4,7 @@ a{
   text-decoration: none !important;
 }
 
+/* head style */
 .brand > a{
     text-decoration: none;
     color: limegreen;
@@ -25,4 +26,22 @@ a{
 #login_btn > a.signup{
     text-decoration: none;
     color: limegreen;
+}
+#user-nav{
+
+}
+/* head style end */
+
+
+/* side menu style */
+div.side-menu-bar{
+    width: 250px;
+    height: 100vh;
+}
+/* side menu style end */
+
+/* content-box style */
+div.content-box{
+    height: 100vh;
+    overflow-y: auto;
 }
