@@ -5,12 +5,21 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true,
         lowercase: true,
+        unique: true,
         trim: true
     },
     sub_category:{
         type: [String],
-        lowercase: true,
-        trim: true
+        set: (arr) => {
+            let lower = [];
+
+          /* lower case the value and trim both side */
+            arr.forEach((element) => {
+                lower.push(element.toLowerCase().trim());
+            });
+
+            return lower;
+      }
     }
 });
 

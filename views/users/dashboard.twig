@@ -13,8 +13,7 @@
   </a></div>
 
   <div class="d-flex align-items-center ml-md-auto">
-      <p id="post_add" class="font-weight-bold mb-0 mr-5"><a href="/u/dashboard">POST YOUR AD</a></p>
-      <p id="login_btn" class="mb-0 ml-auto"><a class="signin font-weight-bold" href="/u/signin">SIGN IN</a><a class="signup font-weight-bold" href="/u/signup"> /SIGN UP</a></p>
+     <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/logout"><i class="fas fa-power-off mr-1"></i>LOGOUT</a></p>
   </div>
 </div>
 <!-- Header Section end -->
@@ -23,24 +22,25 @@
 <div class="main-box d-flex">
     <!-- side menu bar -->
     <div class="side-menu-bar bg-dark">
-        <div class="ml-2 mt-3">
+        <div class="m-2">
+            <h5 class="text-light text-center">DASHBOARD</h5>
+            <hr class="hr-light">
             <ul class="list-unstyled">
-                <li ><a class="text-light" href="/u/dashboard">VIEW CLASSIFIED</a></li>
-                <li><a class="text-light" href="/u/add">ADD CLASSIFIED</a></li>
-                <li><a class="text-light" href="/u/setting">SETTING</a></li>
+                <li class="py-2"><a class="text-light" href="/u/dashboard"><i class="fas fa-th-list fa-fw mr-3"></i>View Classified</a></li>
+                <li class="py-2"><a class="text-light" href="/u/add"><i class="fas fa-plus fa-fw mr-3"></i>Add Classified</a></li>
+                <li class="py-2"><a class="text-light" href="/u/setting"><i class="fas fa-cog fa-fw mr-3"></i>Setting</a></li>
             </ul>
         </div>
     </div>
     <!-- content box-->
     <div class="content-box w-100">
-            {% if success %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ success }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endif %}
+        <!-- breadcrumb start -->
+            <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+            </nav>
+        <!-- breadcrumb end -->
             <div class="container">
                 <div class="row">
 

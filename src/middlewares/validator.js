@@ -1,6 +1,7 @@
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
 const { User } = require("../models/user");
+const { Classified } = require("../models/classified_model");
 
 /**
  * post signup validation
@@ -60,9 +61,27 @@ const forgotValidator =[
     })
 ];
 
+/**
+ *  post classified validation
+ */
+const classifiedValidator = [
+    check('title')
+        .isLength({min: 10, max: 80}).withMessage('Title must be at least 10 chars and max 80 chars long'),
+    check('description')
+        .isLength({ min: 100, max: 500}).withMessage('Description must be at least 100 chars and max 500 chars long'),
+    check('email').isEmail().withMessage('Enter a valid email'),
+    check('website').isURL().withMessage('Enter a valid website'),
+    check('mobile').isMobilePhone("en-IN").withMessage('Enter a valid mobile no.'),
+    check('category').isLength({ min: 1 }).withMessage('Please select a category'),
+    check('subcategory').isLength({ min: 1 }).withMessage('Please select a subcategory'),
+    check('district').isLength({ min: 1 }).withMessage('Please select a district'),
+    check('city').isLength({ min: 1 }).withMessage('Please select a city'),   
+];
+
 
 exports.signupValidator = signupValidator;
 exports.resetValidator = resetValidator;
 exports.forgotValidator = forgotValidator;
+exports.classifiedValidator = classifiedValidator;
 exports.validationResult = validationResult;
 exports.matchedData = matchedData;

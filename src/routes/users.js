@@ -1,11 +1,19 @@
 const router = require("express").Router();
 const passport = require("passport");
 const { User } = require("../models/user");
+const { Classified } = require("../models/classified_model");
 const { randomText } = require("../services/randomText");
 const { mongooseError } = require("../services/mongooseError");
 const { sendMail, confirmHtml, resetHtml } = require("../services/nodeMailer");
+const { category, district } = require("../services/getCategoryDistrict");
 const { userAuth } = require("../middlewares/authRequest");
-const { signupValidator, resetValidator, forgotValidator, validationResult, matchedData } = require("../middlewares/validator");
+const { 
+    signupValidator, 
+    resetValidator, 
+    forgotValidator, 
+    classifiedValidator,
+    validationResult, 
+    matchedData } = require("../middlewares/validator");
 
 /**
  * user landing page router
@@ -105,7 +113,7 @@ router.post("/signin", passport.authenticate( 'local', {
 router.get("/dashboard", userAuth, (req, res, next) => {
     // if user log-out doesn't access this route
     //res.send("dashboard");
-    res.render("users/dashboard", { title: "User Dashboard" })
+    res.render("users/dashboard", { title: "User Dashboard", userid: req.user._id });
 });
 
 /**
@@ -269,15 +277,65 @@ router.get("/signout", (req, res, next) => {
      res.redirect("/");
 });
 
-/**
- * add classified router
- */
-router.get("/add", (req, res, next) =>{
-    res.render("users/add", { title: "Add Classified"});
+/************************************************************************
+ ************************* classified router ****************************
+ ***********************************************************************/
+router.get("/view", (req, res, next) =>{
+    Classified.find()
+              .exec((err, data) =>{
+                if(err){
+                    const error = mongooseError(err);
+                    next(error);
+                    return;
+                }
+                  res.send(data);
+              })
 });
 
+ router.get("/add", (req, res, next) =>{
+    res.render("users/add", { title: "Add Classified", userid: req.user._id, categories: category, districts: district });
+});
 
+router.post("/add", classifiedValidator, (req, res, next) =>{
+    const errors = validationResult(req);
+    const dataMatch = matchedData(req);
+    if (!errors.isEmpty()) {
+        //console.log(errors.mapped());
+        //console.log(dataMatch);
+        return res.render("users/add", { title: "Add Classified", errors: errors.mapped(), data: dataMatch });
+    }
+    let newClassified = new Classified({
+       title: req.body.title,
+       description: req.body.description,
+       email: req.body.email,
+       website: req.body.website,
+       mobile: req.body.mobile,
+       category: req.body.category,
+       sub_category: req.body.subcategory,
+       district: req.body.district,
+       city: req.body.city,
+       user: req.body.userid
+    });
+    newClassified.save((err) =>{
+        if(err){
+            const error = mongooseError(err);
+            next(error);
+            return;
+        }
+        res.send("Successfully record saved");
+    })
+});
 
+router.get("/delete/:id", (req, res) =>{
+    Classified.deleteOne({ _id: req.params.id })
+            .exec((err) =>{
+                if(err){
+                    res.send(err);
+                    return false;
+                }
+                    res.send("Successfully record deleted.");
+            });
+});
 
 
 

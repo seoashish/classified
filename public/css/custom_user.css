@@ -45,3 +45,9 @@ div.content-box{
     height: 100vh;
     overflow-y: auto;
 }
+
+/* err class */
+span.err{
+    color: red;
+    font-weight: bold;
+}

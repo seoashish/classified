@@ -26,6 +26,7 @@ mongoose.connect(config.get('database'), { useCreateIndex: true, useNewUrlParser
  * set twig as view engine
  */
 app.set("view engine", "twig");
+app.set("twig options", { allow_async: true });
 
 /**
  * body parse into json format

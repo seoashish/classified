@@ -20,6 +20,10 @@ $(document).ready(function(){
 
 alert("custom_user.js work ");
 
+/* call DOM */
+category();
+district();
+
 /* window resize event */
 $(window).resize(function(){
 /* customize side-menu-bar height according navbar height */ 
@@ -30,3 +34,25 @@ $(window).resize(function(){
 
 
 });
+
+
+/* DOM manipulating function */
+function category(){
+ $("#category").on("change", function(){
+    let selectedVal = $(this).find("option:selected").val();
+    $(`#subcategory > optgroup[label="${selectedVal}"]`)
+    .show()
+    .siblings("optgroup")
+    .css("display", "none");
+ });
+};
+
+function district(){
+    $("#district").on("change", function(){
+       let selectedVal = $(this).find("option:selected").val();
+       $(`#city > optgroup[label="${selectedVal}"]`)
+       .show()
+       .siblings("optgroup")
+       .css("display", "none");
+    });
+   };
