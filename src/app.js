@@ -114,7 +114,7 @@ app.use("/api", Api);
  * 404 route handler
  */
 app.get('*', function(req, res){
-  res.render("404page", { title: "404 Error" });
+  res.render("404page", { title: "404 Error | Jharkhand Classified" });
 });
 
 /**

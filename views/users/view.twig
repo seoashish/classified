@@ -1,0 +1,180 @@
+{% extends "layout.twig" %}
+{% block title %} {{ title }} {% endblock title %}
+{% block head%}
+<link rel="stylesheet" href="css/custom_user.css">
+{% endblock head%}
+
+{% block body %}
+<!-- Header Section -->
+<div id="user-nav" class="d-flex flex-column flex-md-row align-items-md-center bg-whitesmoke p-2">
+  <div class="brand pl-2 align-self-center "><a href="/">
+  <img src="/demo.png" width="40" height="40" alt="logo">
+  <h2 class="pl-1">Classified</h2>
+  </a></div>
+
+  <div class="d-flex align-items-center ml-md-auto">
+     <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/sighout"><i class="fas fa-power-off mr-1"></i>SIGNOUT</a></p>
+  </div>
+</div>
+<!-- Header Section end -->
+
+<!-- main content box -->
+<div class="main-box d-flex">
+    <!-- side menu bar start -->
+    <div class="side-menu-bar bg-dark">
+        <div class="m-2">
+            <h5 class="text-light text-center">DASHBOARD</h5>
+            <hr class="hr-light">
+            <ul class="list-unstyled">
+                <li class="py-2"><a class="text-light" href="/u/view"><i class="fas fa-th-list fa-fw mr-3"></i>View Classified</a></li>
+                <li class="py-2"><a class="text-light" href="/u/add"><i class="fas fa-plus fa-fw mr-3"></i>Add Classified</a></li>
+                <li class="py-2"><a class="text-light" href="/u/setting"><i class="fas fa-cog fa-fw mr-3"></i>Setting</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- side menu bar end -->
+
+    <!-- content box start -->
+    <div class="content-box w-100">
+        <!-- breadcrumb start -->
+            <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/u/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">View-Classified</li>
+            </ol>
+            </nav>
+        <!-- breadcrumb end -->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                            
+                            <!-- Card start -->
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    View Classified
+                                </div>
+                                <div class="card-body">
+                                   
+                                    {% if classified|length > 0 %}
+                                    <!-- image hover effect item -->
+                                    {% for ads in classified %}
+                                    <div class="hover-item mb-2">
+                                        <div class="d-flex flex-column border">
+                                                <div class="img_title d-flex p-1">
+                                                    <div class="image" style="width: 200px;">
+                                                        <img src="/img/{{ ads.image }}" class="img-fluid img-thumbnail" alt="Image">
+                                                    </div>
+                                                    <div class="title p-2">
+                                                        <p class="font-weight-bold text-limegreen mb-2">{{ ads.title }}</p>
+                                                        <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>{{ ads.email }}</p>
+                                                        <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>{{ ads.website }}</p>
+                                                        <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>{{ ads.mobile }}</p>
+                                                    </div>  
+                                                </div>
+                                                <div class="description px-2">
+                                                    <p class="mb-1">{{ ads.description }} </p>
+                                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>{{ ads.city }} <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>{{ ads.subcategory }}</p>
+                                                </div>
+                                        </div>
+                                        <div class="hover-overlay">
+                                                <div class="card h-100 card text-center text-white bg-secondary">
+                                                <div class="card-header">{{ ads.title }}</div>
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-around">
+                                                        <div class="square-box">
+                                                            <a href="/u/image/{{ ads._id }}" class="text-white">
+                                                             <div><i class="fas fa-upload fa-5x"></i></div>
+                                                             <div>Upload Image</div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="square-box">
+                                                          <a href="/u/delete/{{ ads._id }}" class="text-white">
+                                                            <div class="px-5 py-4"><i class="fas fa-trash fa-2x"></i></div>
+                                                            <div>Delete Classified</div>
+                                                        </a>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        </div>   
+                                    </div>
+                                    {% endfor %}
+                                    <!-- image hover effect item end-->
+                                    {% else %}
+                                    <div class="jumbotron mt-3">
+                                        <h1 class="display-5">No Classified Submitted Yet.</h1>
+                                        <p>To submit new classified. <a href="/u/add">Click here</a></p>
+                                      </div>
+                                    {% endif %}
+                                </div>
+                            </div> 
+                            <!-- Card end --> 
+                    </div>
+                </div>
+            </div>
+
+    <!-- footer section start -->
+    <div class="container-fluid">
+            <footer class="row bg-dark">
+                <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+                  <div class="row">
+                    <div class="col-sm-4">
+                        <div class="p-2">
+                              <h4 class="text-light font-weight-normal">Company</h4>
+                              <ul class="list-unstyled">
+                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Contact us</a></li>
+                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>About us</a></li>
+                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Blogs</a></li>
+                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Terms and Conditions</a></li>
+                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Privacy Policy</a></li>
+                              </ul>
+                        </div>    
+                    </div>
+                    <div class="col-sm-4">
+                          <div class="p-2">
+                                  <h4 class="text-light font-weight-normal">Follow us</h4>
+                                  <ul class="list-unstyled">
+                                      <li>
+                                          <a href="#" class="text-light"><i class="fab fa-facebook-square fa-2x pr-1"></i></a>
+                                          <a href="#" class="text-light"><i class="fab fa-twitter-square fa-2x pr-1"></i></a>
+                                          <a href="#" class="text-light"><i class="fab fa-google-plus-square fa-2x pr-1"></i></a>
+                                      </li>
+                                  </ul>
+                          </div>
+                    </div>
+                    <div class="col-sm-4">
+                          <div class="p-2">
+                                  <h4 class="text-light font-weight-normal">Location</h4>
+                                  
+                                  
+                          </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+              
+              <!--     copyright     -->
+              <div class="row bg-limegreen">
+                  <div class="col-sm-12">
+                  <p class="text-sm-center text-light m-0">All Rights Reserved <i class="fas fa-copyright"></i> 2019 Classified</p>
+                  </div>
+              </div>
+              <!--    copyright end   -->
+              
+    </div>
+    <!-- footer section end -->
+
+    </div>
+    <!-- content box end -->
+
+</div>
+<!-- main content box end -->
+
+
+
+
+{% endblock body %}
+{% block script %}
+<script src="js/custom_user.js"></script>
+{% endblock script %}

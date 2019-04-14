@@ -51,3 +51,12 @@ span.err{
     color: red;
     font-weight: bold;
 }
+
+/* create square box */
+.square-box{
+    width: 150px;
+    height: 140px;
+    padding: 8px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}

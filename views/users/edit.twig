@@ -1,0 +1,245 @@
+{% extends "layout.twig" %}
+{% block title %} {{ title }} {% endblock title %}
+{% block head%}
+<link rel="stylesheet" href="/css/custom_user.css">
+{% endblock head%}
+
+{% block body %}
+
+
+    <!-- Header Section -->
+    <div id="user-nav" class="d-flex flex-column flex-md-row align-items-md-center bg-whitesmoke p-2">
+      <div class="brand pl-2 align-self-center "><a href="/">
+      <img src="/demo.png" width="40" height="40" alt="logo">
+      <h2 class="pl-1">Classified</h2>
+      </a></div>
+    
+      <div class="d-flex align-items-center ml-md-auto">
+          <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/signout"><i class="fas fa-power-off mr-1"></i>SIGNOUT</a></p>
+      </div>
+    </div>
+    <!-- Header Section end -->
+    
+    <!-- main content box -->
+    <div class="main-box d-flex">
+        <!-- side menu bar -->
+        <div class="side-menu-bar bg-dark">
+            <div class="m-2">
+                <h5 class="text-light text-center">DASHBOARD</h5>
+                <hr class="hr-light">
+                <ul class="list-unstyled">
+                    <li class="py-2"><a class="text-light" href="/u/dashboard"><i class="fas fa-th-list fa-fw mr-3"></i>View Classified</a></li>
+                    <li class="py-2"><a class="text-light" href="/u/add"><i class="fas fa-plus fa-fw mr-3"></i>Add Classified</a></li>
+                    <li class="py-2"><a class="text-light" href="/u/setting"><i class="fas fa-cog fa-fw mr-3"></i>Setting</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- side menu bar end -->
+    
+        
+        <!-- content box-->
+        <div class="content-box w-100">
+            <!-- breadcrumb start -->
+                <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/u/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit-Classified</li>
+                </ol>
+                </nav>
+                   
+                 
+            <!-- breadcrumb end -->
+    
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <!-- card start -->
+                                <div class="card">
+                                <h5 class="card-header">Edit Classified</h5>
+                                <div class="card-body">
+                                       {% if errors|length > 0 %}
+                                       <h6 class="mb-0" style="color: red;"><span class="err">*</span> Field must be filled!</h6>
+                                       {% else %}
+                                       <h6 class="mb-0"><span class="err">*</span> Field must be filled</h6>
+                                       {% endif %}
+                                       <hr class="hr-dark">
+                                        <form action="/u/edit" method="post">
+                                        <div class="form-group">
+                                            <label for="title">Title <span class="err">*</span></label>
+                                            {% if errors.title %}
+                                            <input type="text" class="form-control is-invalid" id="title" name="title">
+                                            <div class="invalid-feedback">
+                                             {{ errors.title.msg }}
+                                            </div>
+                                            {% else %}
+                                            <input type="text" class="form-control" id="title" name="title" value="{{ data.title ?: classified.title }}">
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description <span class="err">*</span></label>
+                                            {% if errors.description %}
+                                            <textarea class="form-control is-invalid" id="description" name="description" rows="3"></textarea>
+                                            <div class="invalid-feedback">
+                                            {{ errors.description.msg }}
+                                            </div> 
+                                            {% else %}
+                                            <textarea class="form-control" id="description" name="description" rows="3">{{ data.description ?: classified.description }}</textarea>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            {% if errors.email %}
+                                            <input type="email" class="form-control is-invalid" id="email" name="email">
+                                            <div class="invalid-feedback">
+                                            {{ errors.email.msg }}
+                                            </div>
+                                            {% else %}
+                                            <input type="email" class="form-control" id="email" name="email" value="{{ data.email ?: classified.email }}">
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="website">Website</label>
+                                            {% if errors.website %}
+                                            <input type="text" class="form-control is-invalid" id="website" name="website">
+                                            <div class="invalid-feedback">
+                                            {{ errors.website.msg }}
+                                            </div>
+                                            {% else %}
+                                            <input type="text" class="form-control" id="website" name="website" value="{{ data.website ?: classified.website }}">
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mobile">Mobile</label>
+                                            {% if errors.mobile %}
+                                            <input type="text" class="form-control is-invalid" id="mobile" name="mobile">
+                                            <div class="invalid-feedback">
+                                            {{ errors.mobile.msg }}
+                                            </div>
+                                            {% else %}
+                                            <input type="text" class="form-control" id="mobile" name="mobile" value="{{ data.mobile ?: classified.mobile }}">
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="category">Category <span class="err">*</span></label>
+                                            {% if errors.category %}
+                                            <select class="form-control is-invalid" id="category" name="category">
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            {{ errors.category.msg }}
+                                            </div>
+                                            {% else %}
+                                            <select class="form-control" id="category" name="category"> 
+                                            </select>
+                                            {% endif %}
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="subcategory">Sub-Category <span class="err">*</span></label>
+                                            {% if errors.subcategory %}
+                                            <select class="form-control is-invalid" id="subcategory" name="subcategory" disabled>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            {{ errors.subcategory.msg }}
+                                            </div>
+                                            {% else %}
+                                            <select class="form-control" id="subcategory" name="subcategory" disabled>         
+                                            </select>
+                                            {% endif %}
+                                          </div>
+                                          <div class="form-group">  
+                                            <label for="district">District <span class="err">*</span></label>
+                                            {% if errors.district %}
+                                            <select class="form-control is-invalid" id="district" name="district">
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            {{ errors.district.msg }}
+                                            </div>
+                                            {% else %}
+                                            <select class="form-control" id="district" name="district">
+                                            </select>
+                                            {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="city">City <span class="err">*</span></label>
+                                            {% if errors.city %}
+                                            <select class="form-control is-invalid" id="city" name="city" disabled>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            {{ errors.city.msg }}
+                                            </div>
+                                            {% else %}
+                                            <select class="form-control" id="city" name="city" disabled>
+                                            </select>
+                                            {% endif %}
+                                            </div>
+                                            <input type="hidden" name="classifiedid" value="{{ classified._id }}">
+                                        <button type="submit" class="btn bg-limegreen text-light">Update</button>
+                                        </form>
+                                </div>
+                                </div>
+                            <!-- card end -->    
+                        </div>
+                    </div>
+                </div>
+      
+                <!-- footer section start -->
+                <div class="container-fluid">
+                  <footer class="row bg-dark">
+                      <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+                        <div class="row">
+                          <div class="col-sm-4">
+                              <div class="p-2">
+                                    <h4 class="text-light font-weight-normal">Company</h4>
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Contact us</a></li>
+                                        <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>About us</a></li>
+                                        <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Blogs</a></li>
+                                        <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Terms and Conditions</a></li>
+                                        <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Privacy Policy</a></li>
+                                    </ul>
+                              </div>    
+                          </div>
+                          <div class="col-sm-4">
+                                <div class="p-2">
+                                        <h4 class="text-light font-weight-normal">Follow us</h4>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="#" class="text-light"><i class="fab fa-facebook-square fa-2x pr-1"></i></a>
+                                                <a href="#" class="text-light"><i class="fab fa-twitter-square fa-2x pr-1"></i></a>
+                                                <a href="#" class="text-light"><i class="fab fa-google-plus-square fa-2x pr-1"></i></a>
+                                            </li>
+                                        </ul>
+                                </div>
+                          </div>
+                          <div class="col-sm-4">
+                                <div class="p-2">
+                                        <h4 class="text-light font-weight-normal">Location</h4>
+                                        
+                                        
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </footer>
+                    
+                    <!--     copyright     -->
+                    <div class="row bg-limegreen">
+                        <div class="col-sm-12">
+                        <p class="text-sm-center text-light m-0">All Rights Reserved <i class="fas fa-copyright"></i> 2019 Classified</p>
+                        </div>
+                    </div>
+                    <!--    copyright end   -->
+                    
+                </div>
+                <!-- footer section end -->
+        </div>
+    </div>
+     
+
+{% endblock body %}
+{% block script %}
+<script src="/js/custom_user.js"></script>
+{% endblock script %}
+
+
+
+

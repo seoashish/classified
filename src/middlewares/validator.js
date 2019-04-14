@@ -65,18 +65,34 @@ const forgotValidator =[
  *  post classified validation
  */
 const classifiedValidator = [
-    check('title')
-        .isLength({min: 10, max: 80}).withMessage('Title must be at least 10 chars and max 80 chars long'),
-    check('description')
+    check('description').trim()
+        .not().matches(/(escort|call.?girl)/i).withMessage('Description contain banned word.')
         .isLength({ min: 100, max: 500}).withMessage('Description must be at least 100 chars and max 500 chars long'),
-    check('email').isEmail().withMessage('Enter a valid email'),
-    check('website').isURL().withMessage('Enter a valid website'),
-    check('mobile').isMobilePhone("en-IN").withMessage('Enter a valid mobile no.'),
-    check('category').isLength({ min: 1 }).withMessage('Please select a category'),
-    check('subcategory').isLength({ min: 1 }).withMessage('Please select a subcategory'),
-    check('district').isLength({ min: 1 }).withMessage('Please select a district'),
-    check('city').isLength({ min: 1 }).withMessage('Please select a city'),   
+    check('email').trim().isEmail().withMessage('Enter a valid email'),
+    check('website').trim().isURL().withMessage('Enter a valid website'),
+    check('mobile').trim().isMobilePhone("en-IN").withMessage('Enter a valid mobile no.'),
+    check('category').trim().isLength({ min: 3 }).withMessage('Please select a category'),
+    check('subcategory').trim().isLength({ min: 3 }).withMessage('Please select a subcategory'),
+    check('district').trim().isLength({ min: 3 }).withMessage('Please select a district'),
+    check('city').trim().isLength({ min: 3 }).withMessage('Please select a city'), 
+    check('userid').trim(),
+    /* check unique title in a city  */
+    check('title').trim()
+        .not().matches(/(escort|call.?girl)/i).withMessage('Title contain banned word.')
+        .isLength({min: 10, max: 80}).withMessage('Title must be at least 10 chars and max 80 chars long') 
+        .custom((value, { req }) =>{
+            let title = value.toLowerCase(); 
+            let city = req.body.city.toLowerCase();
+           return Classified.findOne({ title:title, city:city }).then(user =>{
+               if(user){
+                  // console.log(user);
+                   return Promise.reject('Title already exist in this city');
+               }
+           });
+        }),
 ];
+
+
 
 
 exports.signupValidator = signupValidator;

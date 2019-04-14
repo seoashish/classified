@@ -38,7 +38,7 @@ category:{
     lowercase: true,
     trim: true
 },
-sub_category:{
+subcategory:{
     type: String,
     required: true,
     lowercase: true,
@@ -64,6 +64,14 @@ status:{
     type: String,
     enum: ["pending", "active", "banned"],
     default: "active"
+},
+image:{
+    type: String,
+    default: "default.jpg"
+},
+createAt:{
+    type: Date,
+    default: Date.now
 }
 });
 

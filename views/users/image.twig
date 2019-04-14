@@ -13,7 +13,7 @@
   </a></div>
 
   <div class="d-flex align-items-center ml-md-auto">
-     <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/logout"><i class="fas fa-power-off mr-1"></i>LOGOUT</a></p>
+      <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/signout"><i class="fas fa-power-off mr-1"></i>SIGNOUT</a></p>
   </div>
 </div>
 <!-- Header Section end -->
@@ -37,15 +37,46 @@
         <!-- breadcrumb start -->
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <li class="breadcrumb-item"><a href="/u/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Upload Image</li>
             </ol>
             </nav>
+               
+             
         <!-- breadcrumb end -->
+
             <div class="container">
                 <div class="row">
-
+                    <div class="col-sm-12 mb-3">
+                        <!-- card start -->
+                            <div class="card" style="margin-bottom: 200px;">
+                            <h5 class="card-header">Upload Image</h5>
+                            <div class="card-body">
+                                   
+                                    <form action="/u/image" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="image">Choose a image for your classified</label>
+                                        {% if errors %}
+                                        <input type="file" class="form-control-file is-invalid" id="image" aria-describedby="fileHelp" name="image">
+                                        <div class="invalid-feedback">
+                                        {{ "Image size should not exceed 50 kb." }}
+                                        </div>
+                                        {% else %}
+                                        <input type="file" class="form-control-file" id="image" aria-describedby="fileHelp" name="image">
+                                        <small id="fileHelp" class="form-text text-muted">Image size should not exceed 50 kb and dimensions 200x165.</small>
+                                        {% endif %}
+                                    </div>
+            
+                                        <input type="hidden" name="classifiedid" value="{{ classifiedid }}">
+                                    <button type="submit" class="btn bg-limegreen text-light">Upload Image</button>
+                                    </form>
+                            </div>
+                            </div>
+                        <!-- card end -->    
+                    </div>
                 </div>
             </div>
+  
             <!-- footer section start -->
             <div class="container-fluid">
               <footer class="row bg-dark">
@@ -95,6 +126,7 @@
                 <!--    copyright end   -->
                 
             </div>
+            <!-- footer section end -->
     </div>
 </div>
 
@@ -103,7 +135,8 @@
 
 
 
+
+{% endblock body %}
 {% block script %}
 <script src="js/custom_user.js"></script>
 {% endblock script %}
-{% endblock body %}

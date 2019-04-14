@@ -4,7 +4,7 @@ const { District } = require("../models/district_model");
 
 async function getCategory(){
     const category = await Category.find()
-                                   .select("category sub_category -_id");
+                                   .select("category subcategory -_id");
     return category;
 };
 

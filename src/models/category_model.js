@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema({
         unique: true,
         trim: true
     },
-    sub_category:{
+    subcategory:{
         type: [String],
         set: (arr) => {
             let lower = [];

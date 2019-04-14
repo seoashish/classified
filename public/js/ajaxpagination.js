@@ -13,7 +13,12 @@ let html;
 /* when DOM is ready below function is run */
 $(document).ready(function(){
   alert("ajax is call");
+
+  /* ajax call */
   getData();
+  getAllCategory();
+  getAllDistrict();
+
   getPageNo(page_no);
   getCity();
   getCategory();
@@ -26,7 +31,7 @@ $(document).ready(function(){
 /* All function defination below */
 function getCity(){
     /* get city value when it's clicked */
-    $("div.sub-city > li").on("click", function(){
+    $("ul#citylist").on("click", "div.sub-city > li", function(){
         city = $(this).children("span").data("subcity");
         alert(city +" is clicked");
         /* ajax call below */
@@ -35,7 +40,7 @@ function getCity(){
 
 function getCategory(){
     /* get category value when it's clicked */
-    $("div.sub-category > li").on("click", function(){
+    $("ul#cat-list").on("click", "div.sub-category > li", function(){
         category = $(this).children("span").data("subcategory");
         alert(category +" is clicked!");
         /* ajax call below */
@@ -71,18 +76,33 @@ getData();
 
 function manipulateDOM(){
     /* Category accordion */
-    $("div.main-category").on("click", function(){
+    $("ul#cat-list").on("click", "div.main-category", function(){
         $(this).find("li > i").toggleClass("fa-angle-right").toggleClass("fa-angle-down");
         $(this).next("div.sub-category").toggleClass("show");
     });
 
 
-
     /* City accordion */
-    $("div.main-city").on("click", function(){
+    $("ul#citylist").on("click", "div.main-city", function(){
         $(this).find("li > i").toggleClass("fa-angle-right fa-angle-down");
         $(this).next().toggleClass("show");
     });
+};
+
+/* get data using ajax */
+function getAllCategory(){
+    $.get( "/api/category", function( category ) {
+        //console.log(category);
+        categoryHtml(category);
+      });
+};
+
+/* get data using ajax */
+function getAllDistrict(){
+    $.get( "/api/district", function( district ) {
+        //console.log(category);
+        districtHtml(district);
+      });
 };
 
 /* get data using ajax */
@@ -174,13 +194,75 @@ function pagination(totalRecord){
 
 };
 
-/* Example purpose */
-let paginationHTML = `<nav aria-label="">
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="javascript:void(0)" data-page="1">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="javascript:void(0)" data-page="1">1</a></li>
-  <li class="page-item active"><a class="page-link" href="javascript:void(0)" data-page="2">2</a></li>
-  <li class="page-item"><a class="page-link" href="javascript:void(0)" data-page="3">3</a></li>
-  <li class="page-item"><a class="page-link" href="javascript:void(0)" data-page="1">Next</a></li>
-</ul>
-</nav>`;
+/* category html manipulate */
+function categoryHtml(data){
+    let html = "";
+    $("ul#cat-list").html("");
+    if(data.length > 0){
+      data.forEach((category) =>{
+        let cat = "";
+        if(category.category.length > 17){
+            console.log("greater than 12");
+            cat += category.category.slice(0, 17);
+            cat += "...";
+        }else{
+            console.log("less than 12");
+            cat += category.category;
+        }
+        html += `<div class="main-category">
+        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">${titleCase(cat)}</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>
+        </div>`;
+        html += `<div class="sub-category collapse">`;   
+        category.subcategory.forEach((subcategory) =>{
+           html += `<li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcategory="${subcategory}">${titleCase(subcategory)}</span></li>`;
+        });
+        html += `</div>`;
+      });
+    }else{
+        html += `<div class="main-category">
+        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">No Category</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>
+        </div>`;
+    }
+
+    $("ul#cat-list").append(html);
+};
+
+/* district html manipulate */
+function districtHtml(data){
+    let html = "";
+    $("ul#citylist").html("");
+    if(data.length > 0){
+        data.forEach((district) =>{
+            let dist = "";
+            if(district.name.length > 18){
+                dist += district.name.slice(0, 18);
+                dist += "...";
+            }else{
+                dist += district.name;
+            }
+            html += `<div class="main-city">
+            <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">${titleCase(dist)}</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>    
+            </div>`;
+            html += `<div class="sub-city collapse">`;
+            district.city.forEach((city) =>{
+              html += `<li class="bg-whitesmoke d-flex align-items-center mb-1"><i class="fas fa-dot-circle fa-xs ml-2"></i><span class="pl-1" data-subcity="${city}">${titleCase(city)}</span></li>`;
+            });
+            html += `</div>`;
+        }); 
+    }else{
+        html += `<div class="main-city">
+        <li class="bg-whitesmoke d-flex align-items-center mb-1"><span class="pl-2">No City</span><i class="fas fa-angle-right fa-2x bg-lightgray px-2 ml-auto"></i></li>    
+        </div>`;
+    }
+    $("ul#citylist").append(html);
+};
+
+/* title case function */
+function titleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+};

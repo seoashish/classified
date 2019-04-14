@@ -169,7 +169,7 @@ a {
 
 a:hover {
   color: limegreen;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:not([href]):not([tabindex]) {
@@ -9070,4 +9070,22 @@ hr.hr-dark{
 }
 hr.hr-light{
   border-top: 1px solid #ffffff;
+}
+
+/* image hover effect */
+.hover-item{
+  position: relative;
+  overflow: hidden;
+}
+.hover-overlay{
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transition: all 0.5s;
+}
+.hover-item:hover .hover-overlay{
+  top: 0;
 }

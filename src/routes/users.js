@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const passport = require("passport");
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
 const { User } = require("../models/user");
 const { Classified } = require("../models/classified_model");
 const { randomText } = require("../services/randomText");
 const { mongooseError } = require("../services/mongooseError");
 const { sendMail, confirmHtml, resetHtml } = require("../services/nodeMailer");
-const { category, district } = require("../services/getCategoryDistrict");
 const { userAuth } = require("../middlewares/authRequest");
 const { 
     signupValidator, 
@@ -113,7 +115,7 @@ router.post("/signin", passport.authenticate( 'local', {
 router.get("/dashboard", userAuth, (req, res, next) => {
     // if user log-out doesn't access this route
     //res.send("dashboard");
-    res.render("users/dashboard", { title: "User Dashboard", userid: req.user._id });
+    res.render("users/view", { title: "View Classified", userid: req.user._id });
 });
 
 /**
@@ -280,23 +282,27 @@ router.get("/signout", (req, res, next) => {
 /************************************************************************
  ************************* classified router ****************************
  ***********************************************************************/
-router.get("/view", (req, res, next) =>{
-    Classified.find()
-              .exec((err, data) =>{
+
+ /* To view user classifed list */
+ router.get("/view", userAuth, (req, res, next) =>{
+     Classified.find({user: req.user._id})
+               .sort({ createAt: -1 })
+               .exec((err, classified) =>{
                 if(err){
                     const error = mongooseError(err);
                     next(error);
                     return;
                 }
-                  res.send(data);
-              })
+                res.render("users/view", { title: "View Classified", userid: req.user._id, classified: classified });
+               });
 });
 
- router.get("/add", (req, res, next) =>{
-    res.render("users/add", { title: "Add Classified", userid: req.user._id, categories: category, districts: district });
+/* To add a classified  */
+router.get("/add", userAuth, (req, res, next) =>{
+    res.render("users/add", { title: "Add Classified", userid: req.user._id });
 });
 
-router.post("/add", classifiedValidator, (req, res, next) =>{
+router.post("/add", userAuth, classifiedValidator, (req, res, next) =>{
     const errors = validationResult(req);
     const dataMatch = matchedData(req);
     if (!errors.isEmpty()) {
@@ -304,14 +310,14 @@ router.post("/add", classifiedValidator, (req, res, next) =>{
         //console.log(dataMatch);
         return res.render("users/add", { title: "Add Classified", errors: errors.mapped(), data: dataMatch });
     }
-    let newClassified = new Classified({
+    let newClassified =  new Classified({
        title: req.body.title,
        description: req.body.description,
        email: req.body.email,
        website: req.body.website,
        mobile: req.body.mobile,
        category: req.body.category,
-       sub_category: req.body.subcategory,
+       subcategory: req.body.subcategory,
        district: req.body.district,
        city: req.body.city,
        user: req.body.userid
@@ -322,18 +328,117 @@ router.post("/add", classifiedValidator, (req, res, next) =>{
             next(error);
             return;
         }
-        res.send("Successfully record saved");
+        //res.send("Successfully record saved");
+        res.redirect('/u/view');
     })
 });
 
-router.get("/delete/:id", (req, res) =>{
+
+
+/* To edit a classified */
+
+/*
+router.get("/edit/:id", userAuth, (req, res, next) =>{
+    Classified.findById(req.params.id)
+              .exec((err, classified) =>{
+                if(err){
+                    const error = mongooseError(err);
+                    next(error);
+                    return;
+                }
+                res.render("users/edit", { title: "Edit Classified",  classified: classified });
+              });
+});
+
+router.post("/edit", userAuth, classifiedValidator, (req, res, next) =>{
+    const errors = validationResult(req);
+    const dataMatch = matchedData(req);
+    if (!errors.isEmpty()) {
+        //console.log(errors.mapped());
+        //console.log(dataMatch);
+        return res.render("users/edit", { title: "Edit Classified", errors: errors.mapped(), data: dataMatch });
+    }
+});
+
+*/ 
+
+
+/* To uplad a image */
+router.get("/image/:id", (req, res, next) =>{
+    /* send classified id to view */
+    res.render("users/image", { title: "Upload Image", classifiedid: req.params.id })
+});
+
+/**
+ * multer settings
+ */
+
+let Storage = multer.diskStorage({
+    destination: "./public/img",
+    filename: function (req, file, cb) {
+      cb(null, "image" + '-' + Date.now()+ path.extname(file.originalname));
+    }
+});
+let upload = multer({
+    storage: Storage,
+    limits: {
+        fileSize: 1024*50
+    }
+
+}).single("image");
+
+router.post("/image", (req, res, next) =>{
+    upload(req, res, (err) =>{
+        if(err instanceof multer.MulterError){
+           return res.render("users/image", { errors: err.message, classifiedid: req.body.classifiedid })
+        }else if(err){
+            if(err){
+                const error = mongooseError(err);
+                next(error);
+                return;
+            }
+        }
+
+        /* Update classified */
+        Classified.findById(req.body.classifiedid)
+                  .exec((err, classified) =>{
+                    if(err){
+                        const error = mongooseError(err);
+                        next(error);
+                        return;
+                    } 
+                    //console.log(classified.image);
+                    //console.log(req.file.filename);
+                    if(classified.image != "default.jpg"){
+                        fs.unlink(`./public/img/${classified.image}`, function(err){
+                          //  console.log("image delete");
+                            classified.image = req.file.filename;
+                            classified.save((err) =>{
+                                res.redirect("/u/view");
+                            });
+                        });
+                    }else{
+                        //console.log("image not delete");
+                        classified.image = req.file.filename;
+                        classified.save((err) =>{
+                            res.redirect("/u/view");
+                        });
+                    }
+                  });
+    });
+});
+
+/* To delete a classified */
+router.get("/delete/:id", userAuth, (req, res) =>{
     Classified.deleteOne({ _id: req.params.id })
             .exec((err) =>{
                 if(err){
-                    res.send(err);
-                    return false;
+                    const error = mongooseError(err);
+                    next(error);
+                    return;
                 }
-                    res.send("Successfully record deleted.");
+                   // res.send("Successfully record deleted.");
+                   res.redirect('/u/view');
             });
 });
 

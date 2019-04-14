@@ -13,7 +13,7 @@
   </a></div>
 
   <div class="d-flex align-items-center ml-md-auto">
-      <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/logout"><i class="fas fa-power-off mr-1"></i>LOGOUT</a></p>
+      <p id="login_btn" class="mb-0 ml-auto"><a class="signup font-weight-bold" href="/u/signout"><i class="fas fa-power-off mr-1"></i>SIGNOUT</a></p>
   </div>
 </div>
 <!-- Header Section end -->
@@ -41,6 +41,8 @@
                 <li class="breadcrumb-item active" aria-current="page">Add-Classified</li>
             </ol>
             </nav>
+               
+             
         <!-- breadcrumb end -->
 
             <div class="container">
@@ -48,7 +50,7 @@
                     <div class="col-sm-12 mb-3">
                         <!-- card start -->
                             <div class="card">
-                            <h5 class="card-header">Featured</h5>
+                            <h5 class="card-header">Add New Classified</h5>
                             <div class="card-body">
                                    {% if errors|length > 0 %}
                                    <h6 class="mb-0" style="color: red;"><span class="err">*</span> Field must be filled!</h6>
@@ -116,50 +118,25 @@
                                         <label for="category">Category <span class="err">*</span></label>
                                         {% if errors.category %}
                                         <select class="form-control is-invalid" id="category" name="category">
-                                            <option value="">Select category</option>
-                                            {% for category in categories %}
-                                            <option value="{{ category.category }}">{{ category.category|title }}</option>
-                                            {% endfor %}
                                         </select>
                                         <div class="invalid-feedback">
                                         {{ errors.category.msg }}
                                         </div>
                                         {% else %}
-                                        <select class="form-control" id="category" name="category">
-                                            <option value="">Select category</option>
-                                            {% for category in categories %}
-                                            <option value="{{ category.category }}">{{ category.category|title }}</option>
-                                            {% endfor %} 
+                                        <select class="form-control" id="category" name="category"> 
                                         </select>
                                         {% endif %}
                                       </div>
                                       <div class="form-group">
                                         <label for="subcategory">Sub-Category <span class="err">*</span></label>
                                         {% if errors.subcategory %}
-                                        <select class="form-control is-invalid" id="subcategory" name="subcategory">
-                                            <option value="">Select subcategory</option>
-                                        <optgroup label="fashion">
-                                            <option value="men_wear">Men wear</option>
-                                            <option value="women_wear">Women wear</option>
-                                        </optgroup>
-                                        <optgroup label="electronics">
-                                            <option value="television">Television</option>
-                                            <option value="game_console">Game console</option>
-                                        </optgroup>
+                                        <select class="form-control is-invalid" id="subcategory" name="subcategory" disabled>
                                         </select>
                                         <div class="invalid-feedback">
                                         {{ errors.subcategory.msg }}
                                         </div>
                                         {% else %}
-                                        <select class="form-control" id="subcategory" name="subcategory">
-                                        {% for category in categories %}
-                                        <option value="">Select subcategory</option>
-                                        <optgroup label="{{ category.category }}">
-                                          {% for subcategory in category.sub_category %}
-                                            <option value="{{ subcategory }}">{{ subcategory }}</option>
-                                          {% endfor %}
-                                        </optgroup>  
-                                        {% endfor %}
+                                        <select class="form-control" id="subcategory" name="subcategory" disabled>         
                                         </select>
                                         {% endif %}
                                       </div>
@@ -167,57 +144,29 @@
                                         <label for="district">District <span class="err">*</span></label>
                                         {% if errors.district %}
                                         <select class="form-control is-invalid" id="district" name="district">
-                                            <option value="">Select district</option>
-                                            <option value="bokaro">Bokaro</option>
-                                            <option value="dhanbad">Dhanbad</option>
                                         </select>
                                         <div class="invalid-feedback">
                                         {{ errors.district.msg }}
                                         </div>
                                         {% else %}
                                         <select class="form-control" id="district" name="district">
-                                            <option value="">Select district</option>
-                                            <option value="bokaro">Bokaro</option>
-                                            <option value="dhanbad">Dhanbad</option>
                                         </select>
                                         {% endif %}
                                         </div>
                                         <div class="form-group">
                                         <label for="city">City <span class="err">*</span></label>
                                         {% if errors.city %}
-                                        <select class="form-control is-invalid" id="city" name="city">
-                                                <option value="">Select city</option>
-                                            <optgroup label="bokaro">
-                                                <option value="chas">Chas</option>
-                                                <option value="bermo">Bermo</option>
-                                                <option value="peterwar">Peterwar</option>
-                                            </optgroup>
-                                            <optgroup label="dhanbad">
-                                                <option value="gobinpur">Gobinpur</option>
-                                                <option value="topchanchi">Topchanchi</option>
-                                                <option value="tundi">Tundi</option>
-                                            </optgroup>
+                                        <select class="form-control is-invalid" id="city" name="city" disabled>
                                         </select>
                                         <div class="invalid-feedback">
                                         {{ errors.city.msg }}
                                         </div>
                                         {% else %}
-                                        <select class="form-control" id="city" name="city">
-                                                <option value="">Select city</option>
-                                            <optgroup label="bokaro">
-                                                <option value="chas">Chas</option>
-                                                <option value="bermo">Bermo</option>
-                                                <option value="peterwar">Peterwar</option>
-                                            </optgroup>
-                                            <optgroup label="dhanbad">
-                                                <option value="gobinpur">Gobinpur</option>
-                                                <option value="topchanchi">Topchanchi</option>
-                                                <option value="tundi">Tundi</option>
-                                            </optgroup>
+                                        <select class="form-control" id="city" name="city" disabled>
                                         </select>
                                         {% endif %}
                                         </div>
-                                        <input type="hidden" name="userid" value="{{ userid }}">
+                                        <input type="hidden" name="userid" value="{{ userid ?: data.userid }}">
                                     <button type="submit" class="btn bg-limegreen text-light">Submit</button>
                                     </form>
                             </div>
@@ -284,7 +233,8 @@
 
 
 
+
+{% endblock body %}
 {% block script %}
 <script src="js/custom_user.js"></script>
 {% endblock script %}
-{% endblock body %}
