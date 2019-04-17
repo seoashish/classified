@@ -7,11 +7,6 @@ const { Category } = require("../models/category_model");
 /******************************************
  ************* Get Classified *************
  *****************************************/
-router.post("/", function(req, res){
-   console.log(req.body);
-   res.send("hello");
-});
-
 router.post("/classified", function(req, res){
    let limit = parseInt(req.body.limit);
    let page = parseInt(req.body.page) < 1 ? 1 : parseInt(req.body.page);
@@ -77,7 +72,7 @@ let sort_by = { title: 1 };
 ***********************************************/
 router.get("/category", (req, res) =>{
     Category.find()
-            .select("category subcategory -_id")
+            .select("category sub_category -_id")
             .sort({ category: 1 })
             .exec((err, category) =>{
               if(err){
@@ -92,11 +87,3 @@ router.get("/category", (req, res) =>{
 module.exports = router;
 
 
-/* function check object is empty or not */
-function isEmpty(obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
-};
