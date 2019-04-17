@@ -5,8 +5,8 @@ let transporter = nodeMailer.createTransport({
 	port: 2525,
 	secure: false,
   auth: {
-      user: 'seoashishkerketta@gmail.com',
-      pass: 'da01a642-dba0-49bb-b136-ee8a289b7c44'
+      user: 'jharkhandclassified@gmail.com',
+      pass: '9d021bed-f0fc-4672-9bd3-c905c6aa97a6'
   }
 });
 
@@ -14,7 +14,7 @@ let transporter = nodeMailer.createTransport({
 const sendMail = function(dataObject, done){
   
   let mailOptions = {
-    from: '"Ashish Kerketta" <seoashishkerketta@gmail.com>', // sender address
+    from: '"Jharkhand Classified" <jharkhandclassified@gmail.com>', // sender address
     to: dataObject.to, // list of receivers
     subject: dataObject.subject, // Subject line
     //text: 'That was easy!', // plain text body
@@ -38,14 +38,14 @@ const sendMail = function(dataObject, done){
 
 const confirmHtml = function(email, token){
   let html = `<p>Confirm your email address to complete your registration. It's easy - just click the button below.</p>
-              <a href="https://classified.ml/u/confirm/${email}/${token}">Confirm now</a>`;
+              <a href="https://www.jharkhandclassified.com/u/confirm/${email}/${token}">Confirm now</a>`;
   return html;
 
 };
 
 const resetHtml = function(email, token){
   let html = `<p>To reset password follow instruction. It's easy - just click the button below.</p>
-              <a href="https://classified.ml/u/reset/${email}/${token}">Confirm now</a>`;
+              <a href="https://www.jharkhandclassified.com/u/reset/${email}/${token}">Confirm now</a>`;
   return html;
 
 };
