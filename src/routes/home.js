@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 router.get("/", (req, res, next) => {
-      res.render("showads", { title: "View Classifieds" });
+      res.render("showads", { title: "Jharkhand Classified | Classified Ads In Jharkhand | Classified Jharkhand" });
 });
 
 router.get("/view-ad", (req, res, next) => {

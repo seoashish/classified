@@ -72,7 +72,7 @@ let sort_by = { title: 1 };
 ***********************************************/
 router.get("/category", (req, res) =>{
     Category.find()
-            .select("category sub_category -_id")
+            .select("category subcategory -_id")
             .sort({ category: 1 })
             .exec((err, category) =>{
               if(err){
