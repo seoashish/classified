@@ -139,7 +139,17 @@ Classified.findById(req.body.adsId)
           });
       });
   }else{
-
+            // delete classified
+            Classified.deleteOne({ _id: req.body.adsId })
+            .exec((err, data) =>{
+            if(err){
+                  const error = mongooseError(err);
+                  next(error);
+                  return;
+            }
+                  // res.send("Successfully record deleted.");
+                  res.redirect('/a/classified');
+            });
   }
 });  
 });
