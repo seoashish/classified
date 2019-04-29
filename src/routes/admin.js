@@ -117,7 +117,7 @@ Classified.findById(req.body.adsId)
       next(error);
       return;
   }
-  if(ads){
+  if(ads.image != "default.jpg"){
       // delete image
       fs.unlink(`./public/img/${ads.image}`, function(err){
           if(err){
@@ -138,6 +138,8 @@ Classified.findById(req.body.adsId)
                  res.redirect('/a/classified');
           });
       });
+  }else{
+
   }
 });  
 });

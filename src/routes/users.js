@@ -434,7 +434,7 @@ router.get("/delete/:id", userAuth, (req, res) =>{
                     next(error);
                     return;
                 }
-                if(ads){
+                if(ads.image != "default.jpg"){
                     // delete image
                     fs.unlink(`./public/img/${ads.image}`, function(err){
                         if(err){
@@ -454,6 +454,18 @@ router.get("/delete/:id", userAuth, (req, res) =>{
                                // res.send("Successfully record deleted.");
                                res.redirect('/u/view');
                         });
+                    });
+                }else{
+                    // delete classified
+                    Classified.deleteOne({ _id: req.params.id })
+                    .exec((err, data) =>{
+                        if(err){
+                            const error = mongooseError(err);
+                            next(error);
+                            return;
+                        }
+                           // res.send("Successfully record deleted.");
+                           res.redirect('/u/view');
                     });
                 }
               });  
