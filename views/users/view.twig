@@ -1,15 +1,14 @@
 {% extends "layout.twig" %}
 {% block title %} {{ title }} {% endblock title %}
 {% block head%}
-<link rel="stylesheet" href="css/custom_user.css">
+<link rel="stylesheet" href="/css/custom_user.css">
 {% endblock head%}
 
 {% block body %}
 <!-- Header Section -->
 <div id="user-nav" class="d-flex flex-column flex-md-row align-items-md-center bg-whitesmoke p-2">
   <div class="brand pl-2 align-self-center "><a href="/">
-  <img src="/demo.png" width="40" height="40" alt="logo">
-  <h2 class="pl-1">Classified</h2>
+  <img src="/img/logo02.png" height="40" alt="logo">
   </a></div>
 
   <div class="d-flex align-items-center ml-md-auto">
@@ -28,7 +27,6 @@
             <ul class="list-unstyled">
                 <li class="py-2"><a class="text-light" href="/u/view"><i class="fas fa-th-list fa-fw mr-3"></i>View Classified</a></li>
                 <li class="py-2"><a class="text-light" href="/u/add"><i class="fas fa-plus fa-fw mr-3"></i>Add Classified</a></li>
-                <li class="py-2"><a class="text-light" href="/u/setting"><i class="fas fa-cog fa-fw mr-3"></i>Setting</a></li>
             </ul>
         </div>
     </div>
@@ -39,8 +37,7 @@
         <!-- breadcrumb start -->
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/u/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">View-Classified</li>
+                <li class="breadcrumb-item active" aria-current="page">View</li>
             </ol>
             </nav>
         <!-- breadcrumb end -->
@@ -62,24 +59,26 @@
                                     <div class="hover-item mb-2">
                                         <div class="d-flex flex-column border">
                                                 <div class="img_title d-flex p-1">
-                                                    <div class="image" style="width: 200px;">
-                                                        <img src="/img/{{ ads.image }}" class="img-fluid img-thumbnail" alt="Image">
+                                                    <div class="image">
+                                                        <img src="/img/{{ ads.image }}" class="img-custom-thumbnail" alt="Image">
                                                     </div>
                                                     <div class="title p-2">
-                                                        <p class="font-weight-bold text-limegreen mb-2">{{ ads.title }}</p>
+                                                        <p class="font-weight-bold text-limegreen mb-2">{{ ads.title|title }}</p>
                                                         <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>{{ ads.email }}</p>
+                                                        {% if ads.website %}
                                                         <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>{{ ads.website }}</p>
+                                                        {% endif %}
                                                         <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>{{ ads.mobile }}</p>
                                                     </div>  
                                                 </div>
                                                 <div class="description px-2">
-                                                    <p class="mb-1">{{ ads.description }} </p>
-                                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>{{ ads.city }} <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>{{ ads.subcategory }}</p>
+                                                    <p class="mb-1">{{ ads.description|capitalize }} </p>
+                                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-limegreen mr-2"></i>{{ ads.city|title }} <i class="fas fa-th-large text-limegreen ml-5 mr-2"></i>{{ ads.subcategory|title }}</p>
                                                 </div>
                                         </div>
                                         <div class="hover-overlay">
                                                 <div class="card h-100 card text-center text-white bg-secondary">
-                                                <div class="card-header">{{ ads.title }}</div>
+                                                <div class="card-header">{{ ads.title|title }}</div>
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-around">
                                                         <div class="square-box">
@@ -117,42 +116,43 @@
     <!-- footer section start -->
     <div class="container-fluid">
             <footer class="row bg-dark">
-                <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-                  <div class="row">
-                    <div class="col-sm-4">
-                        <div class="p-2">
-                              <h4 class="text-light font-weight-normal">Company</h4>
-                              <ul class="list-unstyled">
-                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Contact us</a></li>
-                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>About us</a></li>
-                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Blogs</a></li>
-                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Terms and Conditions</a></li>
-                                  <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Privacy Policy</a></li>
-                              </ul>
-                        </div>    
-                    </div>
-                    <div class="col-sm-4">
-                          <div class="p-2">
-                                  <h4 class="text-light font-weight-normal">Follow us</h4>
+                    <div class="col-sm-1 col-md-1"></div>
+                    <div class="col-sm-10 col-md-10">
+                      <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-2">
+                                  <h4 class="text-light font-weight-normal">Company</h4>
                                   <ul class="list-unstyled">
-                                      <li>
-                                          <a href="#" class="text-light"><i class="fab fa-facebook-square fa-2x pr-1"></i></a>
-                                          <a href="#" class="text-light"><i class="fab fa-twitter-square fa-2x pr-1"></i></a>
-                                          <a href="#" class="text-light"><i class="fab fa-google-plus-square fa-2x pr-1"></i></a>
-                                      </li>
+                                      <li><a href="/contact" class="text-light"><i class="fas fa-angle-right pr-1"></i>Contact us</a></li>
+                                      <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>About us</a></li>
+                                      <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Blogs</a></li>
+                                      <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Terms and Conditions</a></li>
+                                      <li><a href="#" class="text-light"><i class="fas fa-angle-right pr-1"></i>Privacy Policy</a></li>
                                   </ul>
-                          </div>
+                            </div>    
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                              <div class="p-2">
+                                      <h4 class="text-light font-weight-normal">Follow us</h4>
+                                      <ul class="list-unstyled">
+                                          <li>
+                                              <a href="https://www.facebook.com/jharkhandclassified1" target="_blank" class="text-light"><i class="fab fa-facebook-square fa-2x pr-1"></i></a>
+                                              <a href="#" class="text-light"><i class="fab fa-twitter-square fa-2x pr-1"></i></a>
+                                              <a href="#" class="text-light"><i class="fab fa-google-plus-square fa-2x pr-1"></i></a>
+                                          </li>
+                                      </ul>
+                              </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                              <div class="p-2">
+                                      <h4 class="text-light font-weight-normal">Location</h4>
+                                      <iframe class="map-responsive" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742731.77755678!2d83.39102613797296!3d23.63975913751984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398b2386df480857%3A0x62c5b809eee29004!2sJharkhand!5e0!3m2!1sen!2sin!4v1556379680803!5m2!1sen!2sin" width="270" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>      
+                              </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-sm-4">
-                          <div class="p-2">
-                                  <h4 class="text-light font-weight-normal">Location</h4>
-                                  
-                                  
-                          </div>
-                    </div>
-                  </div>
-                </div>
-              </footer>
+                    <div class="col-sm-1 col-md-1"></div>
+                  </footer>
               
               <!--     copyright     -->
               <div class="row bg-limegreen">
@@ -176,5 +176,5 @@
 
 {% endblock body %}
 {% block script %}
-<script src="js/custom_user.js"></script>
+<script src="/js/custom_user.js"></script>
 {% endblock script %}

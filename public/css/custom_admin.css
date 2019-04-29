@@ -1,0 +1,56 @@
+/*  user style */
+/* all a tag */
+a{
+    text-decoration: none !important;
+  }
+  
+  /* head style */
+  .brand > a{
+      text-decoration: none;
+      color: limegreen;
+      display: flex;
+      align-items: center;
+  }
+  #post_add{
+      padding: 3px 10px;
+      border: 2px solid limegreen;
+  }
+  #post_add > a{
+      text-decoration: none;
+      color: limegreen;
+  }
+  #login_btn > a.signin{
+      text-decoration: none;
+      color: black;
+  }
+  #login_btn > a.signup{
+      text-decoration: none;
+      color: limegreen;
+  }
+
+/* side menu style */
+div.side-menu-bar{
+    width: 250px;
+    height: 100vh;
+}
+/* side menu style end */
+
+/* content-box style */
+div.content-box{
+    height: 100vh;
+    overflow-y: auto;
+}
+/* err class */
+span.err{
+    color: red;
+    font-weight: bold;
+}
+
+/* create square box */
+.square-box{
+    width: 150px;
+    height: 140px;
+    padding: 8px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}

@@ -9089,3 +9089,17 @@ hr.hr-light{
 .hover-item:hover .hover-overlay{
   top: 0;
 }
+
+.img-custom-thumbnail {
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  width: 200px;
+  height: 170px;
+}
+
+/* map-responsive */
+.map-responsive{
+  width: 100%;
+}

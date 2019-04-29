@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema({
     passReset: {
         type: Boolean,
         default: false
+    },
+    createAt:{
+        type: Date,
+        default: Date.now
     }
 });
 

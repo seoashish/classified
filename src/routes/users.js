@@ -109,13 +109,9 @@ router.post("/signin", passport.authenticate( 'local', {
          failureFlash: true
 }));
 
-/**
- * user dashboard router
- */
-router.get("/dashboard", userAuth, (req, res, next) => {
-    // if user log-out doesn't access this route
-    //res.send("dashboard");
-    res.render("users/view", { title: "View Classified", userid: req.user._id });
+/* redirect /u/view  */
+router.get("/dashboard", userAuth, (req, res, next) =>{
+       res.redirect("/u/view");
 });
 
 /**
@@ -293,13 +289,13 @@ router.get("/signout", (req, res, next) => {
                     next(error);
                     return;
                 }
-                res.render("users/view", { title: "View Classified", userid: req.user._id, classified: classified });
+                res.render("users/view", { title: "View Classified | Jharkhand Classified | Classified Ads In Jharkhand", userid: req.user._id, classified: classified });
                });
 });
 
 /* To add a classified  */
 router.get("/add", userAuth, (req, res, next) =>{
-    res.render("users/add", { title: "Add Classified", userid: req.user._id });
+    res.render("users/add", { title: "Add Classified | Jharkhand Classified | Classified Ads In Jharkhand", userid: req.user._id });
 });
 
 router.post("/add", userAuth, classifiedValidator, (req, res, next) =>{
@@ -308,7 +304,7 @@ router.post("/add", userAuth, classifiedValidator, (req, res, next) =>{
     if (!errors.isEmpty()) {
         //console.log(errors.mapped());
         //console.log(dataMatch);
-        return res.render("users/add", { title: "Add Classified", errors: errors.mapped(), data: dataMatch });
+        return res.render("users/add", { title: "Add Classified | Jharkhand Classified | Classified Ads In Jharkhand", errors: errors.mapped(), data: dataMatch });
     }
     let newClassified =  new Classified({
        title: req.body.title,
@@ -366,7 +362,7 @@ router.post("/edit", userAuth, classifiedValidator, (req, res, next) =>{
 /* To uplad a image */
 router.get("/image/:id", (req, res, next) =>{
     /* send classified id to view */
-    res.render("users/image", { title: "Upload Image", classifiedid: req.params.id })
+    res.render("users/image", { title: "Upload Image | Jharkhand Classified | Classified Ads In Jharkhand", classifiedid: req.params.id })
 });
 
 /**
@@ -390,7 +386,7 @@ let upload = multer({
 router.post("/image", (req, res, next) =>{
     upload(req, res, (err) =>{
         if(err instanceof multer.MulterError){
-           return res.render("users/image", { errors: err.message, classifiedid: req.body.classifiedid })
+           return res.render("users/image", { title: "Upload Image | Jharkhand Classified | Classified Ads In Jharkhand", errors: err.message, classifiedid: req.body.classifiedid })
         }else if(err){
             if(err){
                 const error = mongooseError(err);
@@ -430,16 +426,37 @@ router.post("/image", (req, res, next) =>{
 
 /* To delete a classified */
 router.get("/delete/:id", userAuth, (req, res) =>{
-    Classified.deleteOne({ _id: req.params.id })
-            .exec((err) =>{
+    // find classified, delete image from disk and delete classified
+    Classified.findById(req.params.id)
+              .exec((err, ads) =>{
                 if(err){
                     const error = mongooseError(err);
                     next(error);
                     return;
                 }
-                   // res.send("Successfully record deleted.");
-                   res.redirect('/u/view');
-            });
+                if(ads){
+                    // delete image
+                    fs.unlink(`./public/img/${ads.image}`, function(err){
+                        if(err){
+                            const error = mongooseError(err);
+                            next(error);
+                            return;
+                        }
+
+                        // delete classified
+                        Classified.deleteOne({ _id: req.params.id })
+                        .exec((err, data) =>{
+                            if(err){
+                                const error = mongooseError(err);
+                                next(error);
+                                return;
+                            }
+                               // res.send("Successfully record deleted.");
+                               res.redirect('/u/view');
+                        });
+                    });
+                }
+              });  
 });
 
 

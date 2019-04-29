@@ -47,7 +47,7 @@ app.use("/u", express.static("public"));      // file access for user route
 /**
  * server favicon
  */
-app.use(favicon(__dirname + '/demo.ico'));
+app.use(favicon(__dirname + '/logo01.png'));
 
 /**
  * check application mode : development or production

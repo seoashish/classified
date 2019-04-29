@@ -69,7 +69,15 @@ const classifiedValidator = [
         .not().matches(/(escort|call.?girl)/i).withMessage('Description contain banned word.')
         .isLength({ min: 100, max: 500}).withMessage('Description must be at least 100 chars and max 500 chars long'),
     check('email').trim().isEmail().withMessage('Enter a valid email'),
-    check('website').trim().isURL().withMessage('Enter a valid website'),
+    check('website').trim().custom((value) =>{
+       let regex = /^((https?):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/i;
+       if( value != ""){
+           if(!regex.test(value)){
+               return Promise.reject("Please enter a valid website.")
+           }
+       }
+       return true;
+    }),
     check('mobile').trim().isMobilePhone("en-IN").withMessage('Enter a valid mobile no.'),
     check('category').trim().isLength({ min: 3 }).withMessage('Please select a category'),
     check('subcategory').trim().isLength({ min: 3 }).withMessage('Please select a subcategory'),
@@ -93,11 +101,25 @@ const classifiedValidator = [
 ];
 
 
-
+const contactValidator =[
+    check('name').trim(),
+    check('email').trim().isEmail().withMessage('**Enter a valid email'),
+    check('mobile').trim().custom((value) =>{
+        let regex = /^[56789]\d{9}$/;
+        if( value != ""){
+            if(!regex.test(value)){
+                return Promise.reject("**Please enter a valid mobile no.")
+            }
+        }
+        return true;
+     }),
+    check('message').trim().isLength({ min: 10, max: 1000}).withMessage('**Message is too short or too long.'),
+];
 
 exports.signupValidator = signupValidator;
 exports.resetValidator = resetValidator;
 exports.forgotValidator = forgotValidator;
 exports.classifiedValidator = classifiedValidator;
+exports.contactValidator = contactValidator;
 exports.validationResult = validationResult;
 exports.matchedData = matchedData;

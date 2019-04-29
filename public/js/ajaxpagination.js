@@ -112,16 +112,21 @@ function getAllDistrict(){
 /* get data using ajax */
 function getData(){
 //alert("ajax call");
-let query ={};
+let query ={
+    status: "active"
+};
 if( category != "" && city != "" ){
     query.subcategory = category;
     query.city = city;
+    query.status = "active";
 }
 if( category == "" && city != "" ){
     query.city = city;
+    query.status = "active";
 }
 if( category != "" && city == "" ){
     query.subcategory = category;
+    query.status = "active";
 }
 console.log(`ajaxsend: ${JSON.stringify(query)} limit: ${page_limit} page: ${page_no} sort: ${sort_by}`);
     $.ajax({
@@ -280,14 +285,18 @@ function classifiedHtml(data){
         data.forEach((classified) =>{
           html += `<div class="d-flex flex-column border my-2">
           <div class="img_title d-flex p-1">
-              <div class="image" style="width: 200px;">
-                  <img src="/img/${classified.image}" class="img-fluid img-thumbnail" alt="image">
+              <div class="image">
+                  <img src="/img/${classified.image}" class="img-custom-thumbnail" alt="image">
               </div>
               <div class="title p-2">
-                  <p class="font-weight-bold text-limegreen mb-2">${classified.title}</p>
-                  <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i>${classified.email}</p>
-                  <p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i>${classified.website}</p>
-                  <p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>${classified.mobile || "9876543210"}</p>
+                  <p class="font-weight-bold text-limegreen mb-2">${titleCase(classified.title)}</p>
+                  <p class="mb-0 mb-md-1"><i class="fas fa-envelope text-limegreen mr-2"></i><a href = "mailto: ${classified.email}">${classified.email}</a></p>`;
+
+                  if(classified.website){
+                      html += `<p class="mb-0 mb-md-1"><i class="fas fa-globe text-limegreen mr-2"></i><a href="http://${classified.website}" target="_blank">${classified.website}</a></p>`;
+                  }
+                  
+         html += `<p class="mb-0"><i class="fas fa-phone text-limegreen mr-2"></i>${classified.mobile || "9876543210"}</p>
               </div>  
           </div>
           <div class="description px-2">
